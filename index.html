@@ -150,11 +150,11 @@
 <body class="bg-background text-on-background font-body-md selection:bg-primary/30 selection:text-primary overflow-x-hidden">
 <!-- Top Navigation Bar -->
 <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-primary/10">
-<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
-<div class="flex items-center gap-4">
-<img src="logo.png" alt="CASTTCO Logo" class="h-14 md:h-16 w-auto rounded-md shadow-sm">
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tighter">CASTTCO</span>
-</div>
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4">
+<a href="index.html" class="flex items-center gap-4 cursor-pointer">
+<img src="logo.png" alt="CASTTCO Logo" class="h-10 md:h-16 w-auto rounded-md shadow-sm">
+<span class="font-headline-md text-2xl md:text-headline-md font-bold text-primary dark:text-primary tracking-tighter">CASTTCO</span>
+</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#services">SERVICES</a>
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#method">METHOD</a>
@@ -162,9 +162,22 @@
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#testimonials">TESTIMONIALS</a>
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#contact">CONTACT</a>
 </div>
-<a class="bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300" href="#contact">
-                BOOK CONSULTATION
-            </a>
+<div class="flex items-center gap-4">
+<a class="hidden md:inline-block bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300" href="#contact">
+    BOOK CONSULTATION
+</a>
+<button class="md:hidden text-primary p-2 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+    <span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+<!-- Mobile Menu Dropdown -->
+<div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#121414]/95 backdrop-blur-xl border-b border-primary/20 flex-col p-8 gap-8 md:hidden shadow-2xl">
+    <a href="#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">SERVICES</a>
+    <a href="#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">METHOD</a>
+    <a href="#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">ABOUT</a>
+    <a href="#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">TESTIMONIALS</a>
+    <a href="#contact" class="font-label-md text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">CONTACT / BOOK CONSULTATION</a>
 </div>
 </nav>
 <!-- Hero Section -->
@@ -172,11 +185,11 @@
 <div class="absolute inset-0 z-0">
 
 </div>
-<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter relative z-10">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-12 gap-gutter relative z-10">
 <div class="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-8 py-12">
 <div class="space-y-4">
 
-<h1 class="font-display-lg text-display-lg text-white leading-tight">
+<h1 class="font-display-lg text-5xl md:text-display-lg text-white leading-tight">
                         Holistic Wellness | <br/>
 <span class="shimmer-text font-bold">JEFFERY ANKRAH</span>
 </h1>
@@ -184,11 +197,11 @@
 <p class="font-body-lg text-body-lg text-secondary-fixed/80 max-w-xl leading-relaxed">
                     Jeffery Ankrah and CASTTCO provide bespoke wellness strategies for individuals and organizations seeking holistic transformation and peak performance through private, editorial-grade experiences.
                 </p>
-<div class="flex flex-wrap gap-6 pt-4">
-<a href="#contact" class="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md tracking-widest hover:scale-105 transition-all duration-500 gold-glow inline-block cursor-pointer">
+<div class="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 pt-4">
+<a href="#contact" class="bg-primary text-on-primary w-full sm:w-auto text-center px-10 py-4 font-label-md text-label-md tracking-widest hover:scale-105 transition-all duration-500 gold-glow inline-block cursor-pointer">
     BEGIN YOUR JOURNEY
 </a>
-<a href="#philosophy" class="border border-primary/40 text-primary px-10 py-4 font-label-md text-label-md tracking-widest hover:bg-primary/5 transition-all duration-500 inline-block cursor-pointer">
+<a href="#philosophy" class="border border-primary/40 text-primary w-full sm:w-auto text-center px-10 py-4 font-label-md text-label-md tracking-widest hover:bg-primary/5 transition-all duration-500 inline-block cursor-pointer">
     OUR PHILOSOPHY
 </a>
 </div>
@@ -209,9 +222,9 @@
 </section>
 <!-- Our Philosophy Section -->
 <section class="py-24 bg-surface-container-lowest" id="philosophy">
-<div class="max-w-4xl mx-auto px-margin-desktop text-center">
+<div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
 <span class="font-label-md text-primary tracking-widest block uppercase mb-4">Our Philosophy</span>
-<h2 class="font-headline-lg text-headline-lg text-white mb-8 leading-tight">
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mb-8 leading-tight">
     We are dedicated to providing remarkable healing solutions with a non-invasive experience through our state-of-the-art products and services.
 </h2>
 <div class="h-px w-24 bg-primary mx-auto mb-8 opacity-30"></div>
@@ -222,9 +235,9 @@
 </section>
 <!-- Services Section -->
 <section class="py-24 bg-surface" id="services">
-<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="mb-16 text-center max-w-2xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Our Services</h2>
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">Our Services</h2>
 <div class="h-px w-24 bg-primary mx-auto mb-6 opacity-30"></div>
 <p class="font-body-md text-on-surface/60">A fusion of ancient wisdom and modern performance science.</p>
 </div>
@@ -255,9 +268,9 @@
 </section>
 <!-- My Approach Section - Asymmetric Bento Grid -->
 <section class="py-24 bg-surface-container-lowest" id="method">
-<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="mb-16 text-center max-w-2xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-4">The CASTTCO Method</h2>
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">The CASTTCO Method</h2>
 <div class="h-px w-24 bg-primary mx-auto mb-6 opacity-30"></div>
 <p class="font-body-md text-on-surface/60">A fusion of ancient wisdom and modern performance science, tailored for the discerning few.</p>
 </div>
@@ -301,10 +314,10 @@
 
 <!-- The 4 Phases of The CASTTCO Method -->
 <section id="explore-method" class="py-24 bg-surface-container-lowest border-y border-primary/10">
-<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
   <div class="mb-16 text-center max-w-3xl mx-auto">
     <span class="font-label-md text-primary tracking-widest block uppercase mb-4">The Framework</span>
-    <h2 class="font-headline-lg text-headline-lg text-white mb-6">A Premium Journey to Peak Performance</h2>
+    <h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mb-6">A Premium Journey to Peak Performance</h2>
     <div class="h-px w-24 bg-primary mx-auto opacity-30"></div>
   </div>
   
@@ -346,11 +359,11 @@
 
 <!-- Testimonials / Success Stories -->
 <section class="py-24 relative obsidian-marble" id="testimonials">
-<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div>
 <span class="font-label-md text-label-md tracking-widest text-primary uppercase">Client Success</span>
-<h2 class="font-headline-lg text-headline-lg text-white mt-4 mb-8">Refined Perspectives</h2>
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mt-4 mb-8">Refined Perspectives</h2>
 <div class="space-y-12">
 <div class="border-l-2 border-primary/20 pl-8 relative">
 <span class="absolute -left-3 top-0 material-symbols-outlined text-primary bg-background">format_quote</span>
@@ -414,7 +427,7 @@
 </section>
 <!-- Footer -->
 <footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-primary/10 py-20">
-<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
 <div class="space-y-6 max-w-sm">
 <span class="font-headline-md text-headline-md text-primary dark:text-primary tracking-tighter">CASTTCO</span>
@@ -433,12 +446,12 @@
 </a>
 </div>
 <div class="pt-6">
-<a href="#" aria-label="Return to top" class="inline-block cursor-pointer">
+<a href="index.html" aria-label="Return to home" class="inline-block cursor-pointer">
 <img src="logo.png" alt="CASTTCO Logo" class="h-24 md:h-28 w-auto rounded-md shadow-sm opacity-80 hover:opacity-100 transition-opacity">
 </a>
 </div>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-16">
 <div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Navigation</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
