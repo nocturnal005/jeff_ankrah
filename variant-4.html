@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CASTTCO | Bespoke Wellness Consultancy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e3e2e2",
+                    "inverse-primary": "#735c00",
+                    "on-primary-container": "#554300",
+                    "surface-container-low": "#1b1c1c",
+                    "on-secondary": "#313030",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-tertiary-container": "#454545",
+                    "primary-container": "#d4af37",
+                    "tertiary-fixed": "#e5e2e1",
+                    "secondary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "tertiary": "#d0cecd",
+                    "surface-bright": "#383939",
+                    "surface-container-lowest": "#0d0e0f",
+                    "on-tertiary": "#313030",
+                    "background": "#121414",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "inverse-surface": "#e3e2e2",
+                    "secondary-container": "#474746",
+                    "inverse-on-surface": "#2f3031",
+                    "outline-variant": "#4d4635",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-container-high": "#292a2a",
+                    "surface-dim": "#121414",
+                    "surface": "#121414",
+                    "on-primary-fixed-variant": "#574500",
+                    "surface-container": "#1f2020",
+                    "on-primary-fixed": "#241a00",
+                    "on-surface-variant": "#d0c5af",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-variant": "#343535",
+                    "surface-tint": "#e9c349",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffe088",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-primary": "#3c2f00",
+                    "on-surface": "#e3e2e2",
+                    "surface-container-highest": "#343535",
+                    "outline": "#99907c",
+                    "primary": "#f2ca50",
+                    "tertiary-container": "#b5b2b2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-desktop": "64px",
+                    "section-gap": "120px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "headline-xl": ["Playfair Display"],
+                    "body-lg": ["Montserrat"],
+                    "body-md": ["Montserrat"],
+                    "label-md": ["Montserrat"],
+                    "label-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0d0d;
+            color: #e3e2e2;
+            overflow-x: hidden;
+        }
+        .marble-bg {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC-sTOW2BvQ88VCAEQyfOLnbTdMM-WPX72FKZviCceVO0oMGyFbbgdNukVy8wiI4po3CMUbn10mHVc7bR6GaytZLDyup-13ksiOWHsXDxyt-mHb-JoLaIEEXv0xDFh1taDzklz9f7tpLp44RIC1xsRlLPany-JPwN_GAcYYnT7iEZbvjzjndoU8BVcnnJBnfKmQTnzu5XWABEJO36c2GcDde2e7J3nCnsTY0EGQT14cuOl48m3OISQwacXQf17cPimJ1FWxnFXOhj8);
+            background-size: cover;
+            background-position: center;
+        }
+        .gold-border-right {
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .gold-border-bottom {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .gold-glow {
+            box-shadow: 0 0 20px 2px rgba(212, 175, 55, 0.1);
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d0d0d;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4af37;
+        }
+        .reveal-text {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .reveal-text {
+            max-height: 150px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        .split-layout {
+            display: grid;
+            grid-template-columns: 40% 60%;
+        }
+        @media (max-width: 1024px) {
+            .split-layout {
+                grid-template-columns: 100%;
+            }
+            .sidebar-fixed {
+                position: relative;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background scroll-smooth custom-scrollbar split-layout">
+<!-- Sidebar: Fixed Brand Identity -->
+<aside class="sidebar-fixed lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:w-[40%] bg-surface-container-lowest marble-bg flex items-center justify-center gold-border-right z-50">
+<div class="absolute inset-0 bg-background/80 mix-blend-multiply"></div>
+<div class="relative text-center p-8 space-y-6">
+<div class="inline-block p-4 border border-primary/40 gold-glow">
+<span class="font-headline-xl text-primary font-bold tracking-tighter uppercase block text-6xl">C</span>
+</div>
+<h1 class="font-headline-lg text-primary tracking-[0.3em] uppercase text-2xl">CASTTCO</h1>
+<div class="w-12 h-[1px] bg-primary/60 mx-auto"></div>
+<p class="font-label-lg text-on-surface-variant tracking-widest uppercase opacity-70">The Discerning Guardian</p>
+</div>
+<!-- Social Links at Bottom -->
+<div class="absolute bottom-12 left-0 w-full flex justify-center space-x-8 opacity-40">
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</aside>
+<!-- Main Content: Scrolling Narrative -->
+<main class="lg:col-start-2 relative z-10">
+<!-- Top Nav Overlay for Content Area -->
+<header class="sticky top-0 w-full bg-background/90 backdrop-blur-md border-b border-outline-variant/20 z-40">
+<div class="flex justify-between items-center px-8 lg:px-16 py-6">
+<nav class="flex items-center space-x-8">
+<a class="font-label-lg text-primary border-b border-primary pb-1" href="#services">Services</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="#about">About</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="#booking">Booking</a>
+</nav>
+<a class="px-6 py-2 border border-primary text-primary font-label-lg uppercase hover:bg-primary hover:text-on-primary transition-all active:scale-95 text-xs" href="#booking">
+                Inquire
+            </a>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center px-8 lg:px-16 py-section-gap gold-border-bottom">
+<div class="max-w-xl space-y-10">
+<div class="inline-flex items-center space-x-3 text-primary">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-label-lg uppercase tracking-[0.2em]">Exclusivity Redefined</span>
+</div>
+<h2 class="font-headline-xl leading-tight">Elevate Your <br/><span class="italic font-normal text-primary">Wellbeing</span></h2>
+<p class="font-body-lg text-on-surface-variant">
+                Jeffery Ankrah provides bespoke wellness consultancy for elite professionals, offering a sanctuary of calm, quiet authority, and uncompromising care.
+            </p>
+<div class="flex items-center space-x-8">
+<a class="group flex items-center space-x-4 font-label-lg uppercase tracking-widest text-primary" href="#booking">
+<span>Reserve Session</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+<div class="pt-12">
+<div class="aspect-[16/9] bg-surface-container overflow-hidden border border-primary/10">
+<img class="w-full h-full object-cover grayscale opacity-60 hover:opacity-100 transition-opacity duration-1000" data-alt="Sophisticated professional portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6oybm4XMU9OnhV4_kjDihaUe0PDYSg3gFPQSw2R38tUeCP0xyMBNXaCFe0hQ1SQRPoCV6Xu5OyK1Wg25_7q9IcHDbaZ6CExkTDkqxJFVBCcEY8MxVaGMvMMF9Wv6tZRuufXT67KQtkJIdX2iQJ1Vurl-qHHdRZtf3QRaL6Xz-H18JEeU74AtVI1C0uOzgFfpp2BT0gvcYqLvOxp7a0pbF5yVD3o_eCFLhg2DdgqvoOkr2kxS4glSYlahMhSLeE3l_tp5MKCUWh0"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Bespoke Offerings: Compact Grid with Reveal -->
+<section class="px-8 lg:px-16 py-section-gap gold-border-bottom" id="services">
+<div class="mb-16">
+<span class="font-label-lg text-primary uppercase tracking-widest block mb-4">01 — Services</span>
+<h3 class="font-headline-lg">Bespoke Offerings</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-primary/20 border border-primary/20">
+<!-- Service 1 -->
+<div class="group bg-background p-12 transition-all duration-500 hover:bg-surface-container-low cursor-default">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h4 class="font-headline-sm mb-2">Mindset Coaching</h4>
+<p class="font-label-md text-on-surface-variant uppercase tracking-widest text-xs">Cognitive Mastery</p>
+<div class="reveal-text">
+<p class="font-body-md text-on-surface-variant">Advanced strategies designed to master focus and emotional equilibrium in high-pressure environments.</p>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="group bg-background p-12 transition-all duration-500 hover:bg-surface-container-low cursor-default">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+<h4 class="font-headline-sm mb-2">Holistic Strategy</h4>
+<p class="font-label-md text-on-surface-variant uppercase tracking-widest text-xs">Lifestyle Architecture</p>
+<div class="reveal-text">
+<p class="font-body-md text-on-surface-variant">A comprehensive audit of your lifestyle, nutrition, and recovery patterns to create a blueprint for longevity.</p>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="group bg-background p-12 transition-all duration-500 hover:bg-surface-container-low cursor-default">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<h4 class="font-headline-sm mb-2">Executive Wellness</h4>
+<p class="font-label-md text-on-surface-variant uppercase tracking-widest text-xs">Leadership Vitality</p>
+<div class="reveal-text">
+<p class="font-body-md text-on-surface-variant">On-demand consultancy for leadership teams, prioritizing mental clarity as a core business asset.</p>
+</div>
+</div>
+<!-- Service 4 -->
+<div class="group bg-background p-12 transition-all duration-500 hover:bg-surface-container-low cursor-default">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" style="font-variation-settings: 'FILL' 1;">shield</span>
+<h4 class="font-headline-sm mb-2">Private Advocacy</h4>
+<p class="font-label-md text-on-surface-variant uppercase tracking-widest text-xs">Confidential Care</p>
+<div class="reveal-text">
+<p class="font-body-md text-on-surface-variant">Dedicated health advocacy and private navigation through complex medical and wellness landscapes.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Philosophy -->
+<section class="px-8 lg:px-16 py-section-gap gold-border-bottom bg-surface-container-lowest/30" id="about">
+<div class="max-w-xl space-y-8">
+<span class="font-label-lg text-primary uppercase tracking-widest block italic">The Philosophy</span>
+<h3 class="font-headline-lg leading-tight">Quiet Authority. <br/>Precision Care.</h3>
+<p class="font-body-lg">
+                CASTTCO operates on the principle that true wellbeing is a quiet achievement. We offer a private member's club experience—one-on-one, results-driven, and focused on the intricate details of the individual.
+            </p>
+<div class="pt-4">
+<p class="font-headline-sm italic text-primary">Jeffery Ankrah</p>
+<p class="font-label-md uppercase tracking-widest opacity-60 mt-1">Founder &amp; Principal Consultant</p>
+</div>
+</div>
+</section>
+<!-- Booking -->
+<section class="px-8 lg:px-16 py-section-gap gold-border-bottom" id="booking">
+<div class="max-w-xl mb-12">
+<h3 class="font-headline-lg mb-6">Reserve Your Session</h3>
+<p class="font-body-md text-on-surface-variant">Select a convenient time for your initial discovery call with Jeffery. Strict confidentiality guaranteed.</p>
+</div>
+<form class="space-y-10 max-w-lg">
+<div class="relative">
+<label class="block font-label-lg uppercase tracking-widest text-xs text-primary mb-2">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-primary/30 py-4 px-0 focus:ring-0 focus:border-primary text-on-surface transition-all placeholder:text-on-surface-variant/20" placeholder="Your distinguished name" type="text"/>
+</div>
+<div class="relative">
+<label class="block font-label-lg uppercase tracking-widest text-xs text-primary mb-2">Service Pathway</label>
+<select class="w-full bg-transparent border-0 border-b border-primary/30 py-4 px-0 focus:ring-0 focus:border-primary text-on-surface transition-all appearance-none cursor-pointer">
+<option class="bg-surface-container">Mindset Coaching</option>
+<option class="bg-surface-container">Holistic Strategy</option>
+<option class="bg-surface-container">Executive Wellness</option>
+</select>
+</div>
+<button class="w-full py-6 bg-primary text-on-primary font-label-lg uppercase tracking-[0.3em] hover:brightness-110 transition-all gold-glow">
+                Request Appointment
+            </button>
+</form>
+</section>
+<!-- Footer -->
+<footer class="px-8 lg:px-16 py-12 bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div class="space-y-2">
+<p class="font-label-md uppercase tracking-widest opacity-40">© 2024 CASTTCO Wellness</p>
+<p class="font-label-md uppercase tracking-widest text-primary text-xs">Greater London | Bespoke Consultancy</p>
+</div>
+<div class="flex space-x-12">
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors lowercase" href="mailto:Casttcompanyltd@gmail.com">Email</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="tel:07350070869">Call</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+    // Smooth scroll offset for sticky header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Simple reveal observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-8');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section > div').forEach(el => {
+        el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-8');
+        observer.observe(el);
+    });
+</script>
+</body></html>

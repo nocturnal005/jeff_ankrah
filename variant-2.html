@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CASTTCO | Bespoke Wellness Consultancy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e3e2e2",
+                    "inverse-primary": "#735c00",
+                    "on-primary-container": "#554300",
+                    "surface-container-low": "#1b1c1c",
+                    "on-secondary": "#313030",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-tertiary-container": "#454545",
+                    "primary-container": "#d4af37",
+                    "tertiary-fixed": "#e5e2e1",
+                    "secondary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "tertiary": "#d0cecd",
+                    "surface-bright": "#383939",
+                    "surface-container-lowest": "#0d0e0f",
+                    "on-tertiary": "#313030",
+                    "background": "#121414",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "inverse-surface": "#e3e2e2",
+                    "secondary-container": "#474746",
+                    "inverse-on-surface": "#2f3031",
+                    "outline-variant": "#4d4635",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-container-high": "#292a2a",
+                    "surface-dim": "#121414",
+                    "surface": "#121414",
+                    "on-primary-fixed-variant": "#574500",
+                    "surface-container": "#1f2020",
+                    "on-primary-fixed": "#241a00",
+                    "on-surface-variant": "#d0c5af",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-variant": "#343535",
+                    "surface-tint": "#e9c349",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffe088",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-primary": "#3c2f00",
+                    "on-surface": "#e3e2e2",
+                    "surface-container-highest": "#343535",
+                    "outline": "#99907c",
+                    "primary": "#f2ca50",
+                    "tertiary-container": "#b5b2b2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-desktop": "64px",
+                    "section-gap": "120px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "headline-xl": ["Playfair Display"],
+                    "body-lg": ["Montserrat"],
+                    "body-md": ["Montserrat"],
+                    "label-md": ["Montserrat"],
+                    "label-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0d0d;
+            color: #e3e2e2;
+            overflow-x: hidden
+        }
+        .marble-overlay {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC-sTOW2BvQ88VCAEQyfOLnbTdMM-WPX72FKZviCceVO0oMGyFbbgdNukVy8wiI4po3CMUbn10mHVc7bR6GaytZLDyup-13ksiOWHsXDxyt-mHb-JoLaIEEXv0xDFh1taDzklz9f7tpLp44RIC1xsRlLPany-JPwN_GAcYYnT7iEZbvjzjndoU8BVcnnJBnfKmQTnzu5XWABEJO36c2GcDde2e7J3nCnsTY0EGQT14cuOl48m3OISQwacXQf17cPimJ1FWxnFXOhj8);
+            background-size: cover;
+            background-blend-mode: multiply;
+            opacity: 0.08;
+            pointer-events: none
+        }
+        .gold-glow {
+            box-shadow: 0 0 20px 2px rgba(212, 175, 55, 0.1)
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(242, 202, 80, 0.2);
+        }
+        .signature-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            width: 100%
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121414
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4af37
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background scroll-smooth custom-scrollbar">
+<!-- Global Background Elements -->
+<div class="fixed inset-0 marble-overlay z-0"></div>
+<div class="fixed inset-0 bg-gradient-to-b from-transparent via-background/40 to-background z-0"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-container-max mx-auto">
+<a class="font-headline-md text-headline-md font-bold tracking-tighter text-primary uppercase" href="#">CASTTCO</a>
+<nav class="hidden md:flex items-center space-x-12">
+<a class="font-label-lg text-label-lg text-primary font-bold border-b-2 border-primary pb-1" href="#services">Services</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#about">About</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#booking">Booking</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="px-6 py-2 border border-primary text-primary font-label-lg text-label-lg uppercase hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95">
+                Book a Consultation
+            </button>
+</div>
+</header>
+<main class="relative z-10">
+<!-- Hero Section: Variant 2 - Asymmetric -->
+<section class="min-h-screen flex items-center px-margin-desktop max-w-container-max mx-auto py-32 overflow-visible">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center relative">
+<!-- Text Content (Shifted) -->
+<div class="lg:col-span-5 space-y-10 z-20">
+<div class="inline-flex items-center space-x-3 text-primary">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-label-lg text-label-lg uppercase tracking-[0.2em]">The Discerning Guardian</span>
+</div>
+<div class="relative">
+<div class="absolute -left-10 -top-10 w-40 h-40 bg-primary/5 blur-3xl rounded-full"></div>
+<h1 class="font-headline-xl text-headline-xl leading-tight relative text-glow">Elevate Your <br/><span class="italic font-normal">Wellbeing</span></h1>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Jeffery Ankrah provides bespoke wellness consultancy for elite professionals, offering a sanctuary of calm, quiet authority, and uncompromising care.
+                    </p>
+<div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
+<a class="px-10 py-4 bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-widest gold-glow hover:brightness-110 transition-all" href="#booking">
+                            Get Started
+                        </a>
+<a class="font-label-lg text-label-lg text-on-surface uppercase tracking-widest hover:text-primary transition-colors flex items-center group" href="#about">
+                            Our Philosophy <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Asymmetric Image Block -->
+<div class="lg:col-span-7 relative flex justify-end items-center mt-12 lg:mt-0">
+<!-- Overlapping Marble Block -->
+<div class="absolute right-0 bottom-0 lg:right-24 lg:bottom-12 w-[85%] h-[90%] border border-primary/40 p-4 translate-x-8 translate-y-8 lg:translate-x-12 lg:translate-y-12">
+<div class="w-full h-full marble-overlay opacity-20 bg-surface-container"></div>
+</div>
+<!-- Off-center Portrait -->
+<div class="relative w-full lg:w-[80%] aspect-[3/4] bg-surface-container overflow-hidden border border-primary/20 shadow-2xl z-10 lg:-mr-12">
+<img alt="Jeffery Ankrah Portrait" class="w-full h-full object-cover grayscale opacity-90 hover:opacity-100 transition-opacity duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6oybm4XMU9OnhV4_kjDihaUe0PDYSg3gFPQSw2R38tUeCP0xyMBNXaCFe0hQ1SQRPoCV6Xu5OyK1Wg25_7q9IcHDbaZ6CExkTDkqxJFVBCcEY8MxVaGMvMMF9Wv6tZRuufXT67KQtkJIdX2iQJ1Vurl-qHHdRZtf3QRaL6Xz-H18JEeU74AtVI1C0uOzgFfpp2BT0gvcYqLvOxp7a0pbF5yVD3o_eCFLhg2DdgqvoOkr2kxS4glSYlahMhSLeE3l_tp5MKCUWh0"/>
+</div>
+<!-- Decorative Floating Label -->
+<div class="absolute left-0 bottom-12 z-20 bg-background/90 backdrop-blur-md p-6 border border-primary/20 hidden xl:block">
+<p class="font-label-md text-label-md text-primary tracking-[0.3em] uppercase">Est. MMXXIV</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Divider -->
+<div class="signature-divider"></div>
+<!-- Services Section: Variant 2 - Rhythmic Asymmetric Grid -->
+<section class="px-margin-desktop py-section-gap max-w-container-max mx-auto" id="services">
+<div class="flex flex-col lg:flex-row justify-between items-start mb-24 gap-8">
+<div class="max-w-xl">
+<div class="bg-primary/10 w-24 h-1 mb-6"></div>
+<h2 class="font-headline-lg text-headline-lg mb-6 text-glow">Bespoke Offerings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Precision care for high-performance lifestyles. Each pathway is uniquely architected for the individual.</p>
+</div>
+</div>
+<!-- Asymmetric Grid Flow -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+<!-- Service Card 1 (Wide) -->
+<div class="lg:col-span-7 group relative bg-surface-container/50 p-12 border-l-2 border-primary/30 hover:border-primary transition-all duration-500 overflow-hidden">
+<div class="absolute -right-12 -top-12 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[200px]">psychology</span>
+</div>
+<div class="relative z-10">
+<span class="font-label-md text-primary tracking-widest uppercase mb-4 block opacity-50">Pathway 01</span>
+<h3 class="font-headline-md text-headline-md mb-6">Mindset Coaching</h3>
+<p class="font-body-lg text-on-surface-variant mb-10 max-w-lg">Advanced cognitive strategies designed to master focus, resilience, and emotional equilibrium in high-pressure environments.</p>
+<a class="font-label-lg text-label-lg text-primary uppercase flex items-center group-hover:tracking-[0.2em] transition-all" href="#">
+                            Explore Method <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Service Card 2 (Narrow, Offset) -->
+<div class="lg:col-span-5 lg:mt-24 group relative bg-surface-container/50 p-12 border-l-2 border-primary/30 hover:border-primary transition-all duration-500">
+<span class="font-label-md text-primary tracking-widest uppercase mb-4 block opacity-50">Pathway 02</span>
+<h3 class="font-headline-sm text-headline-sm mb-6">Holistic Strategy</h3>
+<p class="font-body-md text-on-surface-variant mb-8">A comprehensive audit of your lifestyle, nutrition, and recovery patterns to create a sustainable blueprint for longevity.</p>
+<a class="font-label-lg text-label-lg text-primary uppercase flex items-center group-hover:translate-x-2 transition-transform" href="#">
+                        Audit Lifestyle <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Service Card 3 (Narrow, Offset Up) -->
+<div class="lg:col-span-5 lg:-mt-24 group relative bg-surface-container/50 p-12 border-l-2 border-primary/30 hover:border-primary transition-all duration-500">
+<span class="font-label-md text-primary tracking-widest uppercase mb-4 block opacity-50">Pathway 03</span>
+<h3 class="font-headline-sm text-headline-sm mb-6">Executive Wellness</h3>
+<p class="font-body-md text-on-surface-variant mb-8">On-demand consultancy for leadership teams, prioritizing mental clarity and peak physiological health as business assets.</p>
+<a class="font-label-lg text-label-lg text-primary uppercase flex items-center group-hover:translate-x-2 transition-transform" href="#">
+                        Team Support <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Abstract Decorative Card -->
+<div class="lg:col-span-7 group relative overflow-hidden bg-primary/5 p-12 flex flex-col justify-center border border-primary/10">
+<div class="marble-overlay absolute inset-0 opacity-10"></div>
+<div class="relative z-10 text-center space-y-6">
+<h4 class="font-headline-sm italic text-primary">"The first step towards an elevated life is a focused conversation."</h4>
+<div class="signature-divider !w-24 mx-auto"></div>
+<p class="font-label-lg uppercase tracking-widest opacity-60">Ready to begin?</p>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="px-margin-desktop py-section-gap bg-surface-container-lowest/50 relative overflow-hidden" id="about">
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="aspect-[4/5] bg-cover bg-center border border-primary/10 shadow-2xl relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBp-MXXlUXKxK1SByuncsyvR7CzN4FB8jIYbGGWLb9kURBOml9iq0FUNAk8paVCMniEA8Hiycj64B3DnpBWQLxQd292o-aT3VLXW2raKptvQHp2xKHKdGD2veyPPaXuryHoq3P64dS9VCby5jdU0ewhnJQBEe0Ub8Ueq8fdeuUE9jfcYWLqJAUOMtemF7rQwECGpxDn37XJCNQNTKNprRXxwhHYNu0CXhrft45ahDUs91ozCV6SsEw5P2wLM58KM2m7TG2D9Fs2nI')">
+<div class="absolute inset-0 bg-background/20"></div>
+</div>
+</div>
+<div class="lg:col-span-6 lg:col-start-7 order-1 lg:order-2 space-y-8">
+<span class="font-label-lg text-label-lg text-primary tracking-widest uppercase italic">The Philosophy</span>
+<h2 class="font-headline-lg text-headline-lg leading-tight text-glow">Quiet Authority. <br/>Bespoke Precision.</h2>
+<p class="font-body-lg text-body-lg text-on-surface">
+                        Jeffery Ankrah founded CASTTCO on the principle that true wellbeing is a quiet achievement. In an era of loud solutions, we offer a private member's club experience—one-on-one, results-driven, and focused on the intricate details of the individual.
+                    </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Our consultancy doesn't just manage symptoms; we architect a transformation. From the first consultation to ongoing executive support, every interaction is a signature of quality.
+                    </p>
+<div class="pt-6">
+<div class="font-headline-sm text-headline-sm italic text-primary">Jeffery Ankrah</div>
+<div class="font-label-md text-label-md uppercase tracking-widest mt-1 opacity-60">Founder &amp; Principal Consultant</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking Section: Variant 2 - Simplified with Floating Action -->
+<section class="px-margin-desktop py-section-gap max-w-container-max mx-auto relative" id="booking">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="space-y-8">
+<div class="bg-primary/10 w-24 h-1"></div>
+<h2 class="font-headline-lg text-headline-lg text-glow">Reserve Your <br/>Discovery Session</h2>
+<p class="font-body-lg text-on-surface-variant">Exclusivity requires planning. Our discovery calls are the foundation of our partnership, allowing us to align on your vision and needs.</p>
+<div class="space-y-6 pt-4">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="font-label-lg uppercase tracking-widest">60-Minute Initial Audit</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<span class="font-label-lg uppercase tracking-widest">Strict Confidentiality</span>
+</div>
+</div>
+</div>
+<div class="relative bg-surface-container p-8 md:p-12 border border-outline-variant/30 gold-glow">
+<form class="space-y-10">
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary text-on-surface transition-all placeholder:text-on-surface-variant/40 peer" placeholder="Full Name" type="text"/>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-500 peer-focus:w-full"></div>
+</div>
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary text-on-surface transition-all placeholder:text-on-surface-variant/40 peer" placeholder="Email Address" type="email"/>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-500 peer-focus:w-full"></div>
+</div>
+<div class="relative group">
+<select class="w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary text-on-surface transition-all appearance-none cursor-pointer peer">
+<option class="bg-surface-container">Select Interest...</option>
+<option class="bg-surface-container">Mindset Coaching</option>
+<option class="bg-surface-container">Holistic Strategy</option>
+<option class="bg-surface-container">Executive Wellness</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-4 text-primary pointer-events-none">expand_more</span>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-500 peer-focus:w-full"></div>
+</div>
+<!-- Floating Gold Action Button -->
+<div class="flex justify-end pt-4">
+<button class="relative w-24 h-24 rounded-full bg-primary text-on-primary font-label-lg uppercase tracking-widest overflow-hidden group shadow-2xl hover:scale-110 transition-transform flex items-center justify-center">
+<span class="relative z-10 text-center text-[10px] leading-tight">Request<br/>Now</span>
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest border-t border-primary/20 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<!-- Brand Column -->
+<div class="space-y-6">
+<div class="font-headline-sm text-headline-sm text-primary uppercase font-bold tracking-tighter">CASTTCO</div>
+<p class="font-body-md text-body-md text-on-surface-variant pr-8">Providing bespoke wellness consultancy for the discerning professional.</p>
+</div>
+<!-- Contact Details Column -->
+<div class="space-y-4">
+<h5 class="font-label-lg text-label-lg text-primary uppercase tracking-widest">Contact</h5>
+<ul class="space-y-2 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-center">
+<span class="material-symbols-outlined text-sm mr-2 opacity-60">location_on</span> Greater London
+                    </li>
+<li class="hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-sm mr-2 opacity-60">call</span>
+<a href="tel:07350070869">07350 070869</a>
+</li>
+<li class="hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-sm mr-2 opacity-60">mail</span>
+<a href="mailto:Casttcompanyltd@gmail.com">Casttcompanyltd@gmail.com</a>
+</li>
+</ul>
+</div>
+<!-- Links Column -->
+<div class="space-y-4">
+<h5 class="font-label-lg text-label-lg text-primary uppercase tracking-widest">Navigation</h5>
+<ul class="space-y-2 font-body-md text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#services">Services</a></li>
+<li><a class="hover:text-primary transition-colors" href="#about">Philosophy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#booking">Booking</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+</ul>
+</div>
+<!-- Digital Presence -->
+<div class="space-y-4">
+<h5 class="font-label-lg text-label-lg text-primary uppercase tracking-widest">Digital</h5>
+<ul class="space-y-2 font-body-md text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="http://www.Casttcompanyltd.com" target="_blank">www.Casttcompanyltd.com</a></li>
+<li class="flex space-x-4 pt-2">
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright -->
+<div class="px-margin-desktop py-8 border-t border-outline-variant/10 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center text-on-surface-variant opacity-60 font-label-md text-label-md uppercase tracking-wider gap-4">
+<span>© 2024 CASTTCO Wellness Consultancy. All rights reserved.</span>
+<span>By Jeffery Ankrah</span>
+</div>
+</footer>
+<script>
+        // Simple scroll reveal effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div, .group').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+
+        // Interactive micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => { el.style.transform = 'scale(0.95)'; });
+            el.addEventListener('mouseup', () => { el.style.transform = 'scale(1)'; });
+            el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; });
+        });
+    </script>
+</body></html>

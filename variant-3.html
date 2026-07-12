@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CASTTCO | Editorial Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e3e2e2",
+                    "inverse-primary": "#735c00",
+                    "on-primary-container": "#554300",
+                    "surface-container-low": "#1b1c1c",
+                    "on-secondary": "#313030",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-tertiary-container": "#454545",
+                    "primary-container": "#d4af37",
+                    "tertiary-fixed": "#e5e2e1",
+                    "secondary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "tertiary": "#d0cecd",
+                    "surface-bright": "#383939",
+                    "surface-container-lowest": "#0d0e0f",
+                    "on-tertiary": "#313030",
+                    "background": "#121414",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "inverse-surface": "#e3e2e2",
+                    "secondary-container": "#474746",
+                    "inverse-on-surface": "#2f3031",
+                    "outline-variant": "#4d4635",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-container-high": "#292a2a",
+                    "surface-dim": "#121414",
+                    "surface": "#121414",
+                    "on-primary-fixed-variant": "#574500",
+                    "surface-container": "#1f2020",
+                    "on-primary-fixed": "#241a00",
+                    "on-surface-variant": "#d0c5af",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-variant": "#343535",
+                    "surface-tint": "#e9c349",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffe088",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#b7b5b4",
+                    "on-primary": "#3c2f00",
+                    "on-surface": "#e3e2e2",
+                    "surface-container-highest": "#343535",
+                    "outline": "#99907c",
+                    "primary": "#f2ca50",
+                    "tertiary-container": "#b5b2b2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-desktop": "64px",
+                    "section-gap": "160px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "headline-xl": ["Playfair Display"],
+                    "body-lg": ["Montserrat"],
+                    "body-md": ["Montserrat"],
+                    "label-md": ["Montserrat"],
+                    "label-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "headline-sm": ["28px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "headline-md": ["42px", {"lineHeight": "1.1", "fontWeight": "600"}],
+                    "headline-lg": ["72px", {"lineHeight": "1.05", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-xl": ["120px", {"lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.2em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0d0d;
+            color: #e3e2e2;
+            overflow-x: hidden;
+        }
+        .marble-bg {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC-sTOW2BvQ88VCAEQyfOLnbTdMM-WPX72FKZviCceVO0oMGyFbbgdNukVy8wiI4po3CMUbn10mHVc7bR6GaytZLDyup-13ksiOWHsXDxyt-mHb-JoLaIEEXv0xDFh1taDzklz9f7tpLp44RIC1xsRlLPany-JPwN_GAcYYnT7iEZbvjzjndoU8BVcnnJBnfKmQTnzu5XWABEJO36c2GcDde2e7J3nCnsTY0EGQT14cuOl48m3OISQwacXQf17cPimJ1FWxnFXOhj8);
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+        }
+        .gold-gradient-overlay {
+            background: linear-gradient(to right, rgba(13, 13, 13, 0.95) 30%, rgba(212, 175, 55, 0.2) 70%, rgba(13, 13, 13, 0.4) 100%);
+        }
+        .text-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .line-stretch {
+            display: inline-block;
+            transform: scaleY(1.4);
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background scroll-smooth">
+<header class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-margin-desktop py-8 flex justify-between items-center border-b border-white/5">
+<a class="font-headline-md text-headline-sm font-black tracking-widest text-white uppercase" href="#">CASTTCO</a>
+<nav class="hidden lg:flex items-center space-x-12">
+<a class="font-label-lg text-white hover:text-primary transition-colors" href="#services">COLLECTIONS</a>
+<a class="font-label-lg text-white hover:text-primary transition-colors" href="#about">THE VISION</a>
+<a class="font-label-lg text-white hover:text-primary transition-colors" href="#booking">RÉSERVE</a>
+</nav>
+<div class="w-12 h-[1px] bg-white"></div>
+</header>
+<main class="relative z-10">
+<!-- Hero: Editorial Portrait Background -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Jeffery Ankrah portrait" class="w-full h-full object-cover grayscale object-right lg:object-center opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6oybm4XMU9OnhV4_kjDihaUe0PDYSg3gFPQSw2R38tUeCP0xyMBNXaCFe0hQ1SQRPoCV6Xu5OyK1Wg25_7q9IcHDbaZ6CExkTDkqxJFVBCcEY8MxVaGMvMMF9Wv6tZRuufXT67KQtkJIdX2iQJ1Vurl-qHHdRZtf3QRaL6Xz-H18JEeU74AtVI1C0uOzgFfpp2BT0gvcYqLvOxp7a0pbF5yVD3o_eCFLhg2DdgvoOkr2kxS4glSYlahMhSLeE3l_tp5MKCUWh0"/>
+<div class="absolute inset-0 gold-gradient-overlay"></div>
+</div>
+<div class="relative z-10 w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="max-w-4xl space-y-12">
+<div class="reveal-up" data-delay="0.2">
+<span class="font-label-lg uppercase tracking-[0.4em] text-primary mb-4 block">London — Bespoke Wellness</span>
+<h1 class="font-headline-xl text-white">
+<span class="block italic font-normal text-headline-lg mb-[-1.5rem] opacity-80">Re-defining</span>
+<span class="line-stretch">AUTHORITY</span>
+</h1>
+</div>
+<div class="reveal-up flex flex-col md:flex-row gap-12 items-start md:items-end" data-delay="0.4">
+<p class="font-body-lg text-white/80 max-w-md leading-relaxed">
+                        Jeffery Ankrah architects the physiological and cognitive foundations of elite success. A silent partner in your most demanding pursuits.
+                    </p>
+<a class="px-12 py-6 border border-primary text-primary font-label-lg uppercase hover:bg-primary hover:text-on-primary transition-all duration-500 tracking-widest flex items-center" href="#booking">
+                        Request Audit <span class="material-symbols-outlined ml-4">north_east</span>
+</a>
+</div>
+</div>
+</div>
+<div class="absolute bottom-12 right-margin-desktop hidden lg:block text-vertical font-label-md tracking-widest opacity-40">
+            SCROLL TO EXPLORE THE PORTFOLIO
+        </div>
+</section>
+<!-- Editorial Intro: Marble Background -->
+<section class="marble-bg py-section-gap px-margin-desktop relative">
+<div class="max-w-container-max mx-auto border-l border-primary/30 pl-12 lg:pl-24">
+<h2 class="font-headline-lg mb-12 max-w-5xl leading-none">The <span class="italic font-light">Discerning</span> Guardian of Personal Vitality.</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+<p class="font-body-lg text-on-surface-variant">
+                    CASTTCO operates at the intersection of biological precision and executive strategy. We do not offer generic health; we engineer sustainable high-performance.
+                </p>
+<div class="space-y-6">
+<div class="flex items-baseline space-x-6">
+<span class="font-headline-md text-primary/40">01</span>
+<p class="font-body-md uppercase tracking-widest opacity-80">Quiet Mastery over loud solutions.</p>
+</div>
+<div class="flex items-baseline space-x-6">
+<span class="font-headline-md text-primary/40">02</span>
+<p class="font-body-md uppercase tracking-widest opacity-80">Absolute discretion for elite profiles.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services: Full-Bleed Horizontal Sections -->
+<section class="bg-background" id="services">
+<!-- Service 1 -->
+<div class="flex flex-col lg:flex-row min-h-[80vh] border-t border-white/5">
+<div class="lg:w-1/2 relative group overflow-hidden">
+<img alt="Mindset Mastery" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 transition-all duration-1000 scale-105 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8fxooTPW8EqEbOGH4v_lc5xvaA4D21Lo07P8JPOBjnfReShiDUnATqZKJdZwmcksyY6QeWPZdyNoK0r2dfeJAtXuwvYvnsUdd7chXuaGkoZv1fb_7a57GEdtuY3jqpycYwpcmMBEuq-T-9bBxNeBkR0tROyWpXXJbmjGp3gGvm8iSyuaAcncALxz12wVA9HXFwFjyTOgqj9sK9h_mkPBmJl-TE9dS1zwEYLMYEEhSnYfzuA_8pZfP1jAKI_6JYzx2D71XTly4ujw"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="font-headline-xl text-white/5 uppercase select-none">MINDSET</span>
+</div>
+</div>
+<div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center space-y-12 bg-surface-container">
+<div>
+<span class="text-primary font-label-lg mb-4 block tracking-widest">PATHWAY I</span>
+<h3 class="font-headline-lg mb-8">Cognitive Architecture</h3>
+<p class="font-body-lg text-on-surface-variant max-w-xl">
+                        Advanced mindset coaching designed for leaders who operate in zero-error environments. We refine focus, mental endurance, and emotional equilibrium through bespoke neurological strategies.
+                    </p>
+</div>
+<div class="flex items-center space-x-8">
+<div class="h-[1px] w-24 bg-primary"></div>
+<a class="font-label-lg text-primary uppercase hover:tracking-[0.4em] transition-all" href="#">Explore Method</a>
+</div>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="flex flex-col lg:flex-row-reverse min-h-[80vh] border-t border-white/5">
+<div class="lg:w-1/2 relative group overflow-hidden">
+<img alt="Holistic Strategy" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 transition-all duration-1000 scale-105 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4yI2CVOfknvTseknckGWM6Ya8P75YcGD1L0lMrvvBHsUMp3rap_3TwnNoUzWhw541eUSNleCU5JhJlabZGlC5sVbhtemD0lie4Rq7YBZemBUvqF3NlXXHyBlsaXYOOEGFTpAbkYnTqPpW1A5rx860pX7vI96DNj2w4HiQTK51jpdU_Nj4IXCof3Pq3QikvnJ4WMf7daGQOKsedukkHGvOIOrOmzmlJ_Zwzho4v3l5PHIxJKwRc2Yr96Z0vsg646zHZXFyWJzUChU"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="font-headline-xl text-white/5 uppercase select-none">STRATEGY</span>
+</div>
+</div>
+<div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center space-y-12 bg-surface-container-low">
+<div>
+<span class="text-primary font-label-lg mb-4 block tracking-widest">PATHWAY II</span>
+<h3 class="font-headline-lg mb-8">Holistic Strategy</h3>
+<p class="font-body-lg text-on-surface-variant max-w-xl">
+                        A rigorous audit of physiological metrics, nutrition, and recovery cycles. We architect a complete lifestyle blueprint that treats longevity as your most valuable asset.
+                    </p>
+</div>
+<div class="flex items-center space-x-8">
+<div class="h-[1px] w-24 bg-primary"></div>
+<a class="font-label-lg text-primary uppercase hover:tracking-[0.4em] transition-all" href="#">Explore Method</a>
+</div>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="flex flex-col lg:flex-row min-h-[80vh] border-t border-white/5">
+<div class="lg:w-1/2 relative group overflow-hidden">
+<img alt="Executive Wellness" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 transition-all duration-1000 scale-105 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBli9tkOqxnMo1ph-bUqoc8HGMgXh_4q2df9jxkBTHa9Zv1DB4c8IP0Y26qU087zTxuB6IcMuuC0T_7xY3DdpThg7_wSqRvlnv0QYuQ3FFxa33ZTV302WaCL4sZptardPx3JXDZ50BdJJijWEE3UjFQ1SRaS4L9DhIRgp3-QEpOa5mcgeJOIP0AAQwuU_mMgot17oBJ6WijI1cChcprHnN0Tl2FiRAwIfEt2N5DEImpJ_PQe7CPTVTwNXDetPnH8tFIU56FTswX_Es"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="font-headline-xl text-white/5 uppercase select-none">EXECUTIVE</span>
+</div>
+</div>
+<div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center space-y-12 bg-surface-container">
+<div>
+<span class="text-primary font-label-lg mb-4 block tracking-widest">PATHWAY III</span>
+<h3 class="font-headline-lg mb-8">Executive Vitality</h3>
+<p class="font-body-lg text-on-surface-variant max-w-xl">
+                        On-demand consultancy for global leadership. Ensuring peak physiological health is maintained amidst the relentless demands of high-stakes commerce and travel.
+                    </p>
+</div>
+<div class="flex items-center space-x-8">
+<div class="h-[1px] w-24 bg-primary"></div>
+<a class="font-label-lg text-primary uppercase hover:tracking-[0.4em] transition-all" href="#">Explore Method</a>
+</div>
+</div>
+</div>
+</section>
+<!-- The Vision Section (Jeffery Signature) -->
+<section class="marble-bg py-section-gap" id="about">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="space-y-12">
+<span class="font-label-lg text-primary tracking-[0.3em] uppercase italic">The Philosophy</span>
+<h2 class="font-headline-xl text-white leading-none">Quiet <br/><span class="font-light italic text-headline-lg opacity-70">Authority.</span></h2>
+<div class="space-y-8 font-body-lg leading-relaxed text-on-surface max-w-lg">
+<p>“True wellbeing is a silent achievement. It is the absence of friction in the mind and the presence of effortless power in the body.”</p>
+<div class="pt-12">
+<p class="font-headline-sm italic text-primary mb-2">Jeffery Ankrah</p>
+<p class="font-label-md uppercase tracking-widest opacity-50">Founder &amp; Principal</p>
+</div>
+</div>
+</div>
+<div class="relative aspect-square">
+<div class="absolute inset-0 border border-primary/20 rotate-3 transition-transform duration-1000 group-hover:rotate-0"></div>
+<div class="absolute inset-4 bg-cover bg-center grayscale shadow-2xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBp-MXXlUXKxK1SByuncsyvR7CzN4FB8jIYbGGWLb9kURBOml9iq0FUNAk8paVCMniEA8Hiycj64B3DnpBWQLxQd292o-aT3VLXW2raKptvQHp2xKHKdGD2veyPPaXuryHoq3P64dS9VCby5jdU0ewhnJQBEe0Ub8Ueq8fdeuUE9jfcYWLqJAUOMtemF7rQwECGpxDn37XJCNQNTKNprRXxwhHYNu0CXhrft45ahDUs91ozCV6SsEw5P2wLM58KM2m7TG2D9Fs2nI')">
+<div class="absolute inset-0 bg-primary/5"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Booking Section -->
+<section class="bg-surface-container-lowest py-section-gap relative overflow-hidden" id="booking">
+<div class="max-w-4xl mx-auto px-margin-desktop text-center space-y-12">
+<div class="reveal-up">
+<h2 class="font-headline-xl mb-4 leading-none">RÉSERVE</h2>
+<p class="font-label-lg tracking-widest uppercase text-primary">Inquiry &amp; Private Consultation</p>
+</div>
+<form class="space-y-12 text-left bg-surface-container/30 p-12 lg:p-24 border border-white/5 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-4">
+<label class="font-label-md uppercase tracking-widest opacity-60">Your Identity</label>
+<input class="w-full bg-transparent border-0 border-b border-white/20 focus:border-primary focus:ring-0 py-4 transition-all text-headline-sm font-headline-sm italic placeholder:opacity-20" placeholder="Full Name" type="text"/>
+</div>
+<div class="space-y-4">
+<label class="font-label-md uppercase tracking-widest opacity-60">Pathway</label>
+<select class="w-full bg-transparent border-0 border-b border-white/20 focus:border-primary focus:ring-0 py-4 transition-all text-label-lg uppercase appearance-none cursor-pointer">
+<option class="bg-black">Mindset Coaching</option>
+<option class="bg-black">Holistic Strategy</option>
+<option class="bg-black">Executive Wellness</option>
+</select>
+</div>
+</div>
+<div class="pt-8">
+<button class="w-full py-8 bg-primary text-on-primary font-label-lg uppercase tracking-[0.5em] hover:brightness-125 transition-all text-xl">
+                        Request Discovery Session
+                    </button>
+<p class="text-center font-label-md opacity-40 mt-8 uppercase tracking-widest">STRICT CONFIDENTIALITY ASSURED</p>
+</div>
+</form>
+</div>
+</section>
+</main>
+<footer class="bg-black py-24 px-margin-desktop border-t border-white/5">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-8">
+<h4 class="font-headline-md font-black tracking-tighter text-primary uppercase">CASTTCO</h4>
+<div class="space-y-2 opacity-60">
+<p class="font-label-lg">GREATER LONDON / GLOBAL ON-SITE</p>
+<p class="font-label-lg">07350 070869</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-24">
+<div class="space-y-6">
+<h5 class="font-label-lg text-primary">COLLECTIONS</h5>
+<ul class="space-y-3 font-body-md opacity-60">
+<li><a class="hover:opacity-100" href="#">Mindset</a></li>
+<li><a class="hover:opacity-100" href="#">Strategy</a></li>
+<li><a class="hover:opacity-100" href="#">Executive</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="font-label-lg text-primary">CONTACT</h5>
+<ul class="space-y-3 font-body-md opacity-60">
+<li><a class="hover:opacity-100" href="mailto:Casttcompanyltd@gmail.com">Inquiries</a></li>
+<li><a class="hover:opacity-100" href="#">LinkedIn</a></li>
+<li><a class="hover:opacity-100" href="#">Instagram</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center font-label-md opacity-30 uppercase tracking-[0.2em] gap-4">
+<span>© 2024 CASTTCO</span>
+<span>Curated by Jeffery Ankrah</span>
+</div>
+</footer>
+<script>
+    // Intersection Observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-up').forEach((el) => {
+        if (el.dataset.delay) {
+            el.style.transitionDelay = el.dataset.delay + 's';
+        }
+        observer.observe(el);
+    });
+
+    // Smooth horizontal scroll behavior for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body></html>
