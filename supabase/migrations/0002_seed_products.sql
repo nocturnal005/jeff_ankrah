@@ -9,9 +9,21 @@
 --
 -- The remaining two cards, Wellness Consulting and THz/HPT Therapy, are not
 -- seeded here. They are services and route to the consultation booking flow.
+--
+-- The socks have no product copy of their own on the site: their image is
+-- currently borrowed by the Wellness Consulting service card, whose wording
+-- describes consulting rather than socks. The description below is a factual
+-- placeholder and wants replacing with Frank's own copy.
 
 insert into public.products (slug, name, description, image_path, sort_order)
 values
+  (
+    'wellness-harlequin-check-socks',
+    'Wellness Harlequin Check Socks',
+    'Harlequin check wellness socks, made for everyday comfort and support.',
+    'wellness harlequin check socks.jpeg',
+    5
+  ),
   (
     'traditional-herbal-remedies',
     'Traditional Herbal Remedies',
