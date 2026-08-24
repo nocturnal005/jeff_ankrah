@@ -239,6 +239,11 @@
       : Cart.count();
     badge.textContent = String(n);
     badge.hidden = n === 0;
+    // The hidden attribute alone is not enough here. It sets display:none from
+    // the user agent stylesheet, which Tailwind's flex class outranks on
+    // specificity, so the badge sat there reading 0 on every page. An inline
+    // style is the one thing that beats the class.
+    badge.style.display = n === 0 ? 'none' : 'flex';
   }
 
   function openDrawer() {
