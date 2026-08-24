@@ -216,10 +216,27 @@
     if (totalNode) totalNode.textContent = money(subtotalPence()) || SYMBOL + '0.00';
   }
 
+  /* Once products are known, anything unsellable is taken out of the stored
+   * basket rather than merely hidden. Filtering it only at render time left
+   * the badge counting items the drawer refused to show, so the icon read
+   * three while the basket looked empty. */
+  function pruneUnsellable() {
+    if (!loaded) return;
+    var doomed = Cart.items().filter(function (item) {
+      var product = byId[item.id];
+      return !product || typeof product.price_pence !== 'number';
+    });
+    doomed.forEach(function (item) { Cart.remove(item.id); });
+  }
+
   function renderCount() {
     var badge = document.getElementById('basket-count');
     if (!badge) return;
-    var n = Cart.count();
+    // Before products load, the raw count is the only number available. After,
+    // it agrees with the drawer because the basket has been pruned.
+    var n = loaded
+      ? basketLines().reduce(function (sum, line) { return sum + line.qty; }, 0)
+      : Cart.count();
     badge.textContent = String(n);
     badge.hidden = n === 0;
   }
@@ -290,8 +307,10 @@
     renderCount();
 
     fetchProducts().then(function (products) {
-      loaded = true;
       renderGrid(products);
+      loaded = true;
+      pruneUnsellable();
+      renderCount();
       renderDrawer();
     }).catch(function (err) {
       if (window.console) window.console.error(err);
