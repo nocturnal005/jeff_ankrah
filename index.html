@@ -4,10 +4,34 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CASTTCO | Jeffery Ankrah Wellness</title>
+<meta name="description" content="CASTTCO and Jeffery Ankrah provide bespoke holistic wellness for individuals and organisations — THz frequency and HPT therapy, traditional herbal remedies, and wellness consulting across Greater London."/>
+<meta name="theme-color" content="#121414"/>
+<!-- SET THE REAL DOMAIN before going live: replace every occurrence of
+     YOUR-DOMAIN.example below. A wrong canonical or og:url harms search
+     ranking, and a wrong og:image shows a broken preview when the link is
+     shared on WhatsApp, Instagram or LinkedIn. -->
+<link rel="canonical" href="https://YOUR-DOMAIN.example/"/>
+<link rel="icon" type="image/png" href="logo.png"/>
+<link rel="apple-touch-icon" href="logo.png"/>
+
+<!-- Social sharing -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="CASTTCO"/>
+<meta property="og:title" content="CASTTCO | Jeffery Ankrah Wellness"/>
+<meta property="og:description" content="Bespoke holistic wellness for individuals and organisations — THz frequency and HPT therapy, traditional herbal remedies, and wellness consulting."/>
+<meta property="og:url" content="https://YOUR-DOMAIN.example/"/>
+<meta property="og:image" content="https://YOUR-DOMAIN.example/jeffery-ankrah-dark-portrait.png"/>
+<meta property="og:image:alt" content="Jeffery Ankrah, founder of CASTTCO"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="CASTTCO | Jeffery Ankrah Wellness"/>
+<meta name="twitter:description" content="Bespoke holistic wellness for individuals and organisations."/>
+<meta name="twitter:image" content="https://YOUR-DOMAIN.example/jeffery-ankrah-dark-portrait.png"/>
+
 <!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@200;300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -79,13 +103,13 @@
                         "unit": "8px"
                     },
                     "fontFamily": {
-                        "headline-md": ["Libre Caslon Text"],
-                        "body-lg": ["Manrope"],
-                        "headline-lg": ["Libre Caslon Text"],
-                        "body-md": ["Manrope"],
-                        "label-md": ["Manrope"],
-                        "display-lg": ["Libre Caslon Text"],
-                        "headline-lg-mobile": ["Libre Caslon Text"]
+                        "headline-md": ["Libre Caslon Text", "Georgia", "serif"],
+                        "body-lg": ["Manrope", "system-ui", "sans-serif"],
+                        "headline-lg": ["Libre Caslon Text", "Georgia", "serif"],
+                        "body-md": ["Manrope", "system-ui", "sans-serif"],
+                        "label-md": ["Manrope", "system-ui", "sans-serif"],
+                        "display-lg": ["Libre Caslon Text", "Georgia", "serif"],
+                        "headline-lg-mobile": ["Libre Caslon Text", "Georgia", "serif"]
                     },
                     "fontSize": {
                         "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
@@ -145,15 +169,59 @@
         .nav-glow {
             text-shadow: 0 0 10px rgba(242, 202, 80, 0.3);
         }
+        /* Referenced by the hero CTA. Previously used but never defined,
+           so the primary call to action had no glow at all. */
+        .gold-glow {
+            box-shadow: 0 0 24px rgba(242, 202, 80, 0.25);
+        }
+        .gold-glow:hover {
+            box-shadow: 0 0 36px rgba(242, 202, 80, 0.45);
+        }
+        /* Keyboard focus must stay visible: several controls set
+           focus:outline-none with nothing to replace it. */
+        :focus-visible {
+            outline: 2px solid #f2ca50;
+            outline-offset: 3px;
+        }
+        /* The reveal animation is applied by script. Sections start visible
+           so the page is never blank if the observer is slow or unsupported. */
+        .reveal-ready {
+            opacity: 0;
+            transform: translateY(2.5rem);
+            transition: opacity 1200ms ease, transform 1200ms ease;
+        }
+        .reveal-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1200ms ease, transform 1200ms ease;
+        }
+        /* Condensed navigation. The ID selector outranks Tailwind's .py-4
+           regardless of the order the CDN injects its stylesheet. */
+        #nav-inner.nav-condensed {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        nav.nav-condensed-bg {
+            background-color: rgba(18, 20, 20, 0.95);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal-ready { opacity: 1; transform: none; }
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary/30 selection:text-primary overflow-x-hidden">
 <!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-primary/10">
-<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4">
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-primary/10">
+<div id="nav-inner" class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4 transition-all duration-300">
 <a href="index.html" class="flex items-center gap-4 cursor-pointer">
-<img src="logo.png" alt="CASTTCO Logo" class="h-10 md:h-16 w-auto rounded-md shadow-sm">
-<span class="font-headline-md text-2xl md:text-headline-md font-bold text-primary dark:text-primary tracking-tighter">CASTTCO</span>
+<img src="logo.png" alt="CASTTCO" width="256" height="256" class="h-10 md:h-16 w-auto rounded-md shadow-sm">
+<span class="font-headline-md text-2xl md:text-headline-md font-bold text-primary tracking-tighter">CASTTCO</span>
 </a>
 <div class="hidden lg:flex items-center gap-4 xl:gap-8">
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105 whitespace-nowrap" href="#services">OUR PRODUCTS AND SERVICES</a>
@@ -166,25 +234,22 @@
 <a class="hidden lg:inline-block bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 whitespace-nowrap" href="#contact">
     BOOK CONSULTATION
 </a>
-<button class="lg:hidden text-primary p-2 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-    <span class="material-symbols-outlined text-3xl">menu</span>
+<button id="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden text-primary p-2">
+    <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
 </button>
 </div>
 </div>
 <!-- Mobile Menu Dropdown -->
 <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#121414]/95 backdrop-blur-xl border-b border-primary/20 flex-col p-8 gap-8 lg:hidden shadow-2xl">
-    <a href="#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">OUR PRODUCTS AND SERVICES</a>
-    <a href="#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">METHOD</a>
-    <a href="#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">ABOUT</a>
-    <a href="#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">TESTIMONIALS</a>
-    <a href="#contact" class="font-label-md text-primary tracking-widest block" onclick="document.getElementById('mobile-menu').classList.add('hidden')">CONTACT / BOOK CONSULTATION</a>
+    <a href="#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">OUR PRODUCTS AND SERVICES</a>
+    <a href="#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">METHOD</a>
+    <a href="#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">ABOUT</a>
+    <a href="#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">TESTIMONIALS</a>
+    <a href="#contact" class="font-label-md text-primary tracking-widest block">CONTACT / BOOK CONSULTATION</a>
 </div>
 </nav>
 <!-- Hero Section -->
 <section id="about" class="relative min-h-screen flex items-center pt-20 obsidian-marble overflow-hidden">
-<div class="absolute inset-0 z-0">
-
-</div>
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-12 gap-gutter relative z-10">
 <div class="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-8 py-12">
 <div class="space-y-4">
@@ -208,7 +273,7 @@
 </div>
 <div class="col-span-12 lg:col-span-5 relative mt-8 lg:mt-0">
 <div class="relative w-full aspect-[4/5] gold-border overflow-hidden group">
-<img class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" alt="Jeffery Ankrah portrait" src="jeffery-ankrah-dark-portrait.png"/>
+<img class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" alt="Jeffery Ankrah, founder of CASTTCO" src="jeffery-ankrah-dark-portrait.png" fetchpriority="high" decoding="async"/>
 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
 </div>
 <!-- Decorative Element -->
@@ -216,6 +281,7 @@
 <div class="text-center">
 <span class="block font-headline-md text-primary">15+</span>
 <span class="block font-label-md text-[10px] tracking-tighter opacity-70">YEARS OF ELITE SERVICE</span>
+</div>
 </div>
 </div>
 </div>
@@ -244,35 +310,35 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
   <div class="glass-card p-8 group">
     <div class="w-full aspect-square mb-6 overflow-hidden rounded-md border border-primary/20">
-      <img src="wellness harlequin check socks.jpeg" alt="Wellness Products" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
+      <img src="wellness%20harlequin%20check%20socks.jpeg" alt="CASTTCO wellness harlequin check socks" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
     </div>
     <h3 class="font-headline-md text-primary mb-4">Wellness consulting/products</h3>
     <p class="font-body-md text-on-surface/60">Bespoke wellness strategies and premium products designed to elevate your daily performance and comfort.</p>
   </div>
   <div class="glass-card p-8 group">
     <div class="w-full aspect-square mb-6 overflow-hidden rounded-md border border-primary/20">
-      <img src="prife .jpeg" alt="THz Frequency/HPT Therapy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
+      <img src="prife%20.jpeg" alt="Prife THz frequency therapy device in use" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
     </div>
     <h3 class="font-headline-md text-primary mb-4">THz Frequency/HPT Therapy</h3>
     <p class="font-body-md text-on-surface/60">Advanced therapeutic technologies utilizing Terahertz frequencies and Human Performance Technology.</p>
   </div>
   <div class="glass-card p-8 group">
     <div class="w-full aspect-square mb-6 overflow-hidden rounded-md border border-primary/20">
-      <img src="vox stasis liner.jpeg" alt="Traditional Herbal Remedies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
+      <img src="vox%20stasis%20liner.jpeg" alt="Vox stasis liner, part of the traditional herbal range" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
     </div>
     <h3 class="font-headline-md text-primary mb-4">Traditional Herbal Remedies</h3>
     <p class="font-body-md text-on-surface/60">Curated herbal blends grounded in historical efficacy and modern understanding to restore your natural balance.</p>
   </div>
   <div class="glass-card p-8 group">
     <div class="w-full aspect-square mb-6 overflow-hidden rounded-md border border-primary/20">
-      <img src="prife ring.jpeg" alt="Prife Ring" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
+      <img src="prife%20ring.jpeg" alt="The Prife wellness ring" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
     </div>
     <h3 class="font-headline-md text-primary mb-4">Prife Ring</h3>
     <p class="font-body-md text-on-surface/60">A premium wellness accessory integrating advanced frequency harmonization for subtle, continuous performance enhancement.</p>
   </div>
   <div class="glass-card p-8 group">
     <div class="w-full aspect-square mb-6 overflow-hidden rounded-md border border-primary/20">
-      <img src="prife002.jpeg" alt="Prife Frequency Device" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
+      <img src="prife002.jpeg" alt="The Prife frequency device" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]">
     </div>
     <h3 class="font-headline-md text-primary mb-4">Prife Frequency Device</h3>
     <p class="font-body-md text-on-surface/60">State-of-the-art technology that aligns your body's natural energetic frequencies, ensuring peak synchronization and recovery.</p>
@@ -294,7 +360,7 @@
 <div>
 <span class="material-symbols-outlined text-primary text-4xl mb-6">self_improvement</span>
 <h3 class="font-headline-md text-headline-md mb-4 text-white">Mindful Performance</h3>
-
+<p class="font-body-md text-on-surface/60 leading-relaxed">Bespoke mindfulness and strategic wellness practices that give leaders the mental architecture to sustain restored energy under pressure.</p>
 </div>
 <a href="#explore-method" onclick="document.getElementById('explore-method').scrollIntoView({behavior: 'smooth'}); return false;" class="font-label-md text-primary tracking-widest mt-8 group-hover:translate-x-2 transition-transform cursor-pointer inline-flex items-center gap-2">
                         EXPLORE METHOD <span class="material-symbols-outlined text-sm">arrow_forward</span>
@@ -311,7 +377,7 @@
 </div>
 <!-- Item 3 -->
 <div class="md:col-span-7 relative bg-[#0a0a0a] gold-border overflow-hidden group flex rounded-2xl shadow-2xl">
-<img src="tesla_panoramic_1_1783857715980.png" alt="Nikola Tesla Quote" class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-105 opacity-90">
+<img src="tesla_panoramic_1_1783857715980.png" alt="Nikola Tesla on energy, frequency and vibration" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-105 opacity-90">
 <!-- Seamless Edge Masking -->
 <div class="absolute inset-0 shadow-[inset_0_0_80px_30px_rgba(0,0,0,0.95)] pointer-events-none"></div>
 </div>
@@ -393,7 +459,7 @@
 </div>
 <div class="relative group">
 <div class="aspect-square gold-border overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s]" alt="Gold drop in dark pool" src="gold-drop-testimonial.png"/>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s]" alt="A gold drop falling into a dark pool" loading="lazy" decoding="async" src="gold-drop-testimonial.png"/>
 </div>
 <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 backdrop-blur-xl border border-primary/20"></div>
 </div>
@@ -407,31 +473,33 @@
 <h2 class="font-display-lg text-display-lg text-primary mb-4">Contact Us</h2>
 <p class="font-body-md text-on-surface/60 tracking-wide">Enter the sanctuary where technology and nature make a difference together</p>
 </div>
-<form class="space-y-12">
+<form id="consultation-form" class="space-y-12" method="post" novalidate>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 <div class="relative">
-<label class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">NAME</label>
-<input class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Your full name" type="text"/>
+<label for="field-name" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Name</label>
+<input id="field-name" name="name" required autocomplete="name" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Your full name" type="text"/>
 </div>
 <div class="relative">
-<label class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">EMAIL</label>
-<input class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Email address" type="email"/>
+<label for="field-email" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Email</label>
+<input id="field-email" name="email" required autocomplete="email" inputmode="email" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Email address" type="email"/>
 </div>
 </div>
 <div class="relative">
-<label class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">SELECT SERVICE</label>
-<select class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white/50 font-body-md appearance-none transition-colors">
-<option class="bg-surface">Corporate Wellness Strategy</option>
-<option class="bg-surface">Executive Coaching Sanctuary</option>
-<option class="bg-surface">Private Performance Retainer</option>
+<label for="field-service" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Select service</label>
+<select id="field-service" name="service" required class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md appearance-none transition-colors">
+<option class="bg-surface" value="" disabled selected>Choose a service…</option>
+<option class="bg-surface" value="Corporate Wellness Strategy">Corporate Wellness Strategy</option>
+<option class="bg-surface" value="Executive Coaching Sanctuary">Executive Coaching Sanctuary</option>
+<option class="bg-surface" value="Private Performance Retainer">Private Performance Retainer</option>
 </select>
 </div>
 <div class="relative">
-<label class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">MESSAGE</label>
-<textarea class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Briefly describe your objectives" rows="4"></textarea>
+<label for="field-message" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Message</label>
+<textarea id="field-message" name="message" required class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Briefly describe your objectives" rows="4"></textarea>
 </div>
+<p id="form-status" role="status" aria-live="polite" class="text-center font-body-md text-on-surface/70 min-h-[1.5rem]"></p>
 <div class="flex justify-center pt-8">
-<button class="group relative px-12 py-5 bg-primary text-on-primary font-label-md text-label-md tracking-widest overflow-hidden transition-all duration-500" type="submit">
+<button class="group relative px-12 py-5 bg-primary text-on-primary font-label-md text-label-md tracking-widest overflow-hidden transition-all duration-500 disabled:opacity-60" type="submit">
 <span class="relative z-10">REQUEST ACCESS</span>
 <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
 </button>
@@ -440,11 +508,11 @@
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-primary/10 py-20">
+<footer class="bg-surface-container-lowest border-t border-primary/10 py-20">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
 <div class="space-y-6 max-w-sm">
-<span class="font-headline-md text-headline-md text-primary dark:text-primary tracking-tighter">CASTTCO</span>
+<span class="font-headline-md text-headline-md text-primary tracking-tighter">CASTTCO</span>
 <div class="flex gap-6 flex-wrap">
 <a class="text-on-surface/50 hover:text-primary transition-colors flex items-center justify-center w-8 h-8 rounded-full border border-on-surface/10 hover:border-primary/50" href="#" aria-label="Facebook">
 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
@@ -461,7 +529,7 @@
 </div>
 <div class="pt-6">
 <a href="index.html" aria-label="Return to home" class="inline-block cursor-pointer">
-<img src="logo.png" alt="CASTTCO Logo" class="h-24 md:h-28 w-auto rounded-md shadow-sm opacity-80 hover:opacity-100 transition-opacity">
+<img src="logo.png" alt="" aria-hidden="true" width="256" height="256" loading="lazy" decoding="async" class="h-24 md:h-28 w-auto rounded-md shadow-sm opacity-80 hover:opacity-100 transition-opacity">
 </a>
 </div>
 </div>
@@ -469,31 +537,33 @@
 <div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Navigation</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
-<li><a class="hover:text-primary transition-colors" href="#">OUR PRODUCTS AND SERVICES</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">METHOD</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">ABOUT</a></li>
+<li><a class="hover:text-primary transition-colors" href="#services">OUR PRODUCTS AND SERVICES</a></li>
+<li><a class="hover:text-primary transition-colors" href="#method">METHOD</a></li>
+<li><a class="hover:text-primary transition-colors" href="#about">ABOUT</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Connect</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
-<li><a class="hover:text-primary transition-colors" href="#">TESTIMONIALS</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">CONTACT</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">LEGAL</a></li>
+<li><a class="hover:text-primary transition-colors" href="#testimonials">TESTIMONIALS</a></li>
+<li><a class="hover:text-primary transition-colors" href="#contact">CONTACT</a></li>
+<li><a class="hover:text-primary transition-colors" href="terms.html">TERMS OF SERVICE</a></li>
+<li><a class="hover:text-primary transition-colors" href="refund-policy.html">REFUND POLICY</a></li>
+<li><a class="hover:text-primary transition-colors" href="privacy-policy.html">PRIVACY POLICY</a></li>
 </ul>
 </div>
-<div class="space-y-4 hidden md:block">
+<div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Contact Details</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
-<li>07310061564</li>
-<li>casttcompany@gmail.com</li>
+<li><a class="hover:text-primary transition-colors" href="tel:+447310061564">07310 061564</a></li>
+<li><a class="hover:text-primary transition-colors" href="mailto:casttcompany@gmail.com">casttcompany@gmail.com</a></li>
 <li class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">location_on</span> Greater London</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-primary/5 gap-6">
-<span class="font-label-md text-label-md text-on-surface/30">© 2024 CASTTCO | Jeffery Ankrah Wellness</span>
+<span class="font-label-md text-label-md text-on-surface/30">© 2026 CASTTCO | Jeffery Ankrah Wellness</span>
 <div class="flex items-center gap-2">
 <div class="w-12 h-px bg-primary/20"></div>
 <span class="font-label-md text-label-md tracking-[0.5em] text-primary/40 uppercase">A Celestial Collective</span>
@@ -503,38 +573,127 @@
 </div>
 </footer>
 <script>
-        // Simple scroll interaction for navigation
-        window.addEventListener('scroll', () => {
+        // Condense the navigation bar on scroll.
+        // The padding lives on the inner container, not on <nav> -- toggling
+        // it on <nav> previously made the bar grow taller instead of shrink.
+        (function () {
+            const navInner = document.getElementById('nav-inner');
+            if (!navInner) return;
             const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2');
-                nav.classList.remove('py-4');
-                nav.style.backgroundColor = 'rgba(18, 20, 20, 0.95)';
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-                nav.style.backgroundColor = 'rgba(18, 20, 20, 0.8)';
-            }
-        });
+            const onScroll = () => {
+                const condensed = window.scrollY > 50;
+                navInner.classList.toggle('nav-condensed', condensed);
+                nav.classList.toggle('nav-condensed-bg', condensed);
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
 
-        // Smooth reveal of elements
-        const observerOptions = {
-            threshold: 0.1
-        };
+        // Reveal sections as they enter the viewport.
+        // The hero is deliberately excluded: hiding it before the observer
+        // fires guaranteed a blank first paint on every visit.
+        (function () {
+            const sections = Array.from(document.querySelectorAll('section')).slice(1);
+            if (!('IntersectionObserver' in window)) return; // leave everything visible
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-in');
+                        entry.target.classList.remove('reveal-ready');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.classList.add('reveal-ready');
+                observer.observe(section);
+            });
+        })();
+
+        // Mobile menu: keep the button's ARIA state in step with the panel.
+        (function () {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            if (!btn || !menu) return;
+            const setOpen = (open) => {
+                menu.classList.toggle('hidden', !open);
+                menu.classList.toggle('flex', open);
+                btn.setAttribute('aria-expanded', String(open));
+            };
+            btn.addEventListener('click', () => setOpen(menu.classList.contains('hidden')));
+            menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+
+        // Consultation form.
+        //
+        // SET THIS to your form endpoint once the backend or form service is
+        // live -- e.g. "/api/enquiry" or a Formspree URL. While it is empty the
+        // form falls back to opening a pre-filled email so that no enquiry is
+        // ever silently lost, which is what the form did before.
+        const FORM_ENDPOINT = "";
+        const ENQUIRY_EMAIL = "casttcompany@gmail.com";
+
+        (function () {
+            const form = document.getElementById('consultation-form');
+            const status = document.getElementById('form-status');
+            if (!form || !status) return;
+
+            const say = (message, ok) => {
+                status.textContent = message;
+                status.className = 'text-center font-body-md min-h-[1.5rem] ' +
+                    (ok ? 'text-primary' : 'text-error');
+            };
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                if (!form.checkValidity()) {
+                    say('Please complete every field with a valid email address.', false);
+                    const firstInvalid = form.querySelector(':invalid');
+                    if (firstInvalid) firstInvalid.focus();
+                    return;
+                }
+
+                const data = Object.fromEntries(new FormData(form).entries());
+                const button = form.querySelector('button[type="submit"]');
+
+                if (!FORM_ENDPOINT) {
+                    const body = `Name: ${data.name}
+Email: ${data.email}
+` +
+                        `Service: ${data.service}
+
+${data.message}`;
+                    window.location.href = `mailto:${ENQUIRY_EMAIL}` +
+                        `?subject=${encodeURIComponent('Consultation request: ' + data.service)}` +
+                        `&body=${encodeURIComponent(body)}`;
+                    say('Opening your email app to send this enquiry…', true);
+                    return;
+                }
+
+                button.disabled = true;
+                say('Sending…', true);
+                try {
+                    const response = await fetch(FORM_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if (!response.ok) throw new Error('Request failed: ' + response.status);
+                    form.reset();
+                    say('Thank you. We will be in touch shortly.', true);
+                } catch (error) {
+                    say(`Something went wrong. Please email ${ENQUIRY_EMAIL} directly.`, false);
+                } finally {
+                    button.disabled = false;
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-[1200ms]', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
-        });
+        })();
     </script>
 
 </body></html>
