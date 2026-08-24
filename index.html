@@ -221,6 +221,7 @@
 </a>
 <div class="hidden lg:flex items-center gap-4 xl:gap-8">
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105 whitespace-nowrap" href="#services">OUR PRODUCTS AND SERVICES</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#shop">SHOP</a>
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#method">METHOD</a>
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#about">ABOUT</a>
 <a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#testimonials">TESTIMONIALS</a>
@@ -230,6 +231,10 @@
 <a class="hidden lg:inline-block bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 whitespace-nowrap" href="#contact">
     BOOK CONSULTATION
 </a>
+<button id="basket-toggle" type="button" aria-label="Open basket" class="relative text-primary p-2 hover:scale-105 transition-transform duration-300">
+    <span class="material-symbols-outlined text-3xl" aria-hidden="true">shopping_bag</span>
+    <span id="basket-count" hidden class="absolute top-0 right-0 bg-primary text-on-primary text-xs font-bold rounded-full min-w-[1.25rem] h-5 flex items-center justify-center px-1">0</span>
+</button>
 <button id="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden text-primary p-2">
     <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
 </button>
@@ -238,6 +243,7 @@
 <!-- Mobile Menu Dropdown -->
 <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#121414]/95 backdrop-blur-xl border-b border-primary/20 flex-col p-8 gap-8 lg:hidden shadow-2xl">
     <a href="#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">OUR PRODUCTS AND SERVICES</a>
+    <a href="#shop" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">SHOP</a>
     <a href="#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">METHOD</a>
     <a href="#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">ABOUT</a>
     <a href="#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">TESTIMONIALS</a>
@@ -339,6 +345,19 @@
     <h3 class="font-headline-md text-primary mb-4">Prife Frequency Device</h3>
     <p class="font-body-md text-on-surface/60">State-of-the-art technology that aligns your body's natural energetic frequencies, ensuring peak synchronization and recovery.</p>
   </div>
+</div>
+</div>
+</section>
+<!-- Shop -->
+<section class="py-24" id="shop">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16 text-center max-w-2xl mx-auto">
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">Shop</h2>
+<div class="h-px w-24 bg-primary mx-auto mb-6 opacity-30"></div>
+<p class="font-body-md text-on-surface/60">Wellness products, dispatched within the United Kingdom within 3&ndash;5 working days.</p>
+</div>
+<div id="shop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<p class="font-body-md text-on-surface/60 col-span-full text-center">Loading our range&hellip;</p>
 </div>
 </div>
 </section>
@@ -691,5 +710,35 @@ ${data.message}`;
             });
         })();
     </script>
+
+<!-- Basket -->
+<div id="basket-backdrop" class="fixed inset-0 bg-black/60 z-[60] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<aside id="basket-drawer" aria-hidden="true" aria-label="Your basket" class="fixed top-0 right-0 h-full w-full max-w-md bg-surface border-l border-primary/20 z-[70] translate-x-full transition-transform duration-500 flex flex-col">
+  <div class="flex items-center justify-between p-6 border-b border-primary/20">
+    <h2 class="font-headline-md text-primary">Your Basket</h2>
+    <button id="basket-close" type="button" aria-label="Close basket" class="text-on-surface/60 hover:text-primary p-2">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+  </div>
+  <div class="flex-grow overflow-y-auto px-6">
+    <p id="basket-empty" class="font-body-md text-on-surface/50 text-center py-12">Your basket is empty.</p>
+    <div id="basket-lines"></div>
+  </div>
+  <div class="p-6 border-t border-primary/20 space-y-4">
+    <div class="flex justify-between items-center">
+      <span class="font-body-md text-on-surface/60">Subtotal</span>
+      <span id="basket-subtotal" class="font-headline-md text-primary">&pound;0.00</span>
+    </div>
+    <p class="font-body-md text-on-surface/40 text-sm">Delivery is calculated at checkout.</p>
+    <p id="basket-note" hidden class="font-body-md text-primary text-sm"></p>
+    <button id="basket-checkout" type="button" disabled class="w-full bg-primary text-on-primary py-4 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed">
+      CHECKOUT
+    </button>
+  </div>
+</aside>
+
+<script src="js/config.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/shop.js"></script>
 
 </body></html>
