@@ -111,7 +111,7 @@
         'border border-primary/40 text-primary px-6 py-3 font-label-md ' +
         'text-label-md tracking-widest hover:bg-primary/5 transition-all duration-500',
         'ENQUIRE');
-      enquire.href = '#contact';
+      enquire.href = cfg.contactUrl || '#contact';
       foot.appendChild(enquire);
     }
 

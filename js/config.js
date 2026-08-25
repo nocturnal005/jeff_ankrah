@@ -18,5 +18,8 @@ window.CASTTCO_CONFIG = {
   supabasePublishableKey: 'sb_publishable_AH9K37NyNM7ojBwrPcfpzA_UaMgdy2y',
   currency: 'GBP',
   currencySymbol: '£',
-  consultationPricePence: 5000
+  consultationPricePence: 5000,
+  // The consultation form lives on the home page, so enquiry links from the
+  // shop point back to it rather than to a same-page anchor that is not here.
+  contactUrl: 'index.html#contact'
 };

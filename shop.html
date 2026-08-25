@@ -3,23 +3,23 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CASTTCO | Jeffery Ankrah Wellness</title>
+<title>Shop | CASTTCO</title>
 <meta name="description" content="CASTTCO and Jeffery Ankrah provide bespoke holistic wellness for individuals and organisations — THz frequency and HPT therapy, traditional herbal remedies, and wellness consulting across Greater London."/>
 <meta name="theme-color" content="#121414"/>
-<link rel="canonical" href="https://casttco.online/"/>
+<link rel="canonical" href="https://casttco.online/shop.html"/>
 <link rel="icon" type="image/png" href="logo.png"/>
 <link rel="apple-touch-icon" href="logo.png"/>
 
 <!-- Social sharing -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="CASTTCO"/>
-<meta property="og:title" content="CASTTCO | Jeffery Ankrah Wellness"/>
+<meta property="og:title" content="Shop | CASTTCO"/>
 <meta property="og:description" content="Bespoke holistic wellness for individuals and organisations — THz frequency and HPT therapy, traditional herbal remedies, and wellness consulting."/>
-<meta property="og:url" content="https://casttco.online/"/>
+<meta property="og:url" content="https://casttco.online/shop.html"/>
 <meta property="og:image" content="https://casttco.online/jeffery-ankrah-hero.jpg"/>
 <meta property="og:image:alt" content="Jeffery Ankrah, founder of CASTTCO"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="CASTTCO | Jeffery Ankrah Wellness"/>
+<meta name="twitter:title" content="Shop | CASTTCO"/>
 <meta name="twitter:description" content="Bespoke holistic wellness for individuals and organisations."/>
 <meta name="twitter:image" content="https://casttco.online/jeffery-ankrah-hero.jpg"/>
 
@@ -220,17 +220,21 @@
 <span class="font-headline-md text-lg min-[360px]:text-2xl md:text-headline-md font-bold text-primary tracking-tighter inline lg:hidden xl:inline">CASTTCO</span>
 </a>
 <div class="hidden lg:flex items-center gap-3 xl:gap-6">
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105 whitespace-nowrap" href="#services">SERVICES</a>
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="shop.html">SHOP</a>
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#method">METHOD</a>
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#about">ABOUT</a>
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#testimonials">TESTIMONIALS</a>
-<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#contact">CONTACT</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105 whitespace-nowrap" href="index.html#services">SERVICES</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="#shop">SHOP</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="index.html#method">METHOD</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="index.html#about">ABOUT</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="index.html#testimonials">TESTIMONIALS</a>
+<a class="font-label-md text-label-md tracking-widest text-on-surface/70 hover:text-primary transition-all duration-300 hover:scale-105" href="index.html#contact">CONTACT</a>
 </div>
 <div class="flex items-center gap-4">
-<a class="hidden lg:inline-block bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 whitespace-nowrap" href="#contact">
+<a class="hidden lg:inline-block bg-primary-container text-on-primary px-6 py-2.5 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 whitespace-nowrap" href="index.html#contact">
     BOOK CONSULTATION
 </a>
+<button id="basket-toggle" type="button" aria-label="Open basket" class="relative text-primary p-2 hover:scale-105 transition-transform duration-300">
+    <span class="material-symbols-outlined text-3xl" aria-hidden="true">shopping_bag</span>
+    <span id="basket-count" hidden class="absolute top-0 right-0 bg-primary text-on-primary text-xs font-bold rounded-full min-w-[1.25rem] h-5 flex items-center justify-center px-1">0</span>
+</button>
 <button id="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden text-primary p-2">
     <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
 </button>
@@ -238,250 +242,25 @@
 </div>
 <!-- Mobile Menu Dropdown -->
 <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#121414]/95 backdrop-blur-xl border-b border-primary/20 flex-col p-8 gap-8 lg:hidden shadow-2xl">
-    <a href="#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">SERVICES</a>
-    <a href="shop.html" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">SHOP</a>
-    <a href="#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">METHOD</a>
-    <a href="#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">ABOUT</a>
-    <a href="#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">TESTIMONIALS</a>
-    <a href="#contact" class="font-label-md text-primary tracking-widest block">CONTACT / BOOK CONSULTATION</a>
+    <a href="index.html#services" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">SERVICES</a>
+    <a href="#shop" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">SHOP</a>
+    <a href="index.html#method" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">METHOD</a>
+    <a href="index.html#about" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">ABOUT</a>
+    <a href="index.html#testimonials" class="font-label-md text-on-surface/70 hover:text-primary tracking-widest block">TESTIMONIALS</a>
+    <a href="index.html#contact" class="font-label-md text-primary tracking-widest block">CONTACT / BOOK CONSULTATION</a>
 </div>
 </nav>
-<!-- Hero Section -->
-<section id="about" class="relative min-h-screen flex items-center pt-20 obsidian-marble overflow-hidden">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-12 gap-gutter relative z-10">
-<div class="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-8 py-12">
-<div class="space-y-4">
-
-<h1 class="font-display-lg text-5xl md:text-display-lg text-white leading-tight">
-                        Holistic Wellness | <br/>
-<span class="shimmer-text font-bold">JEFFERY ANKRAH</span>
-</h1>
-</div>
-<p class="font-body-lg text-body-lg text-secondary-fixed/80 max-w-xl leading-relaxed">
-                    Jeffery Ankrah and CASTTCO provide elite and bespoke wellness strategies for individuals and organizations seeking holistic transformation and peak performance through private, editorial-grade experiences.
-                </p>
-<div class="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 pt-4">
-<a href="#contact" class="bg-primary text-on-primary w-full sm:w-auto text-center px-10 py-4 font-label-md text-label-md tracking-widest hover:scale-105 transition-all duration-500 gold-glow inline-block cursor-pointer">
-    BEGIN YOUR JOURNEY
-</a>
-<a href="#philosophy" class="border border-primary/40 text-primary w-full sm:w-auto text-center px-10 py-4 font-label-md text-label-md tracking-widest hover:bg-primary/5 transition-all duration-500 inline-block cursor-pointer">
-    OUR PHILOSOPHY
-</a>
-</div>
-</div>
-<div class="col-span-12 lg:col-span-5 relative mt-8 lg:mt-0">
-<div class="relative w-full aspect-[4/5] gold-border overflow-hidden group">
-<img class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" alt="Jeffery Ankrah, founder of CASTTCO" src="jeffery-ankrah-hero.jpg" fetchpriority="high" decoding="async"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
-</div>
-<!-- Decorative Element -->
-<div class="absolute -bottom-8 -left-8 w-32 h-32 glass-card flex items-center justify-center p-4">
-<div class="text-center">
-<span class="block font-headline-md text-primary">15+</span>
-<span class="block font-label-md text-[10px] tracking-tighter opacity-70">YEARS OF ELITE SERVICE</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Our Philosophy Section -->
-<section class="py-24 bg-surface-container-lowest" id="philosophy">
-<div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
-<span class="font-label-md text-primary tracking-widest block uppercase mb-4">Our Philosophy</span>
-<h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mb-8 leading-tight">
-    We are dedicated to providing remarkable healing solutions with a non-invasive experience through our state-of-the-art products and services.
-</h2>
-<div class="h-px w-24 bg-primary mx-auto mb-8 opacity-30"></div>
-<p class="font-body-lg text-on-surface/70 leading-relaxed">
-    At CASTTCO, we believe that true wellness transcends symptom management—it requires a holistic recalibration of the body and mind. By fusing traditional remedial wisdom with cutting-edge frequency technologies, we empower our clients to achieve peak vitality and sustainable health in a completely natural, unobtrusive manner.
-</p>
-</div>
-</section>
-<!-- Services Section -->
-<section class="py-24 bg-surface" id="services">
+<!-- Shop -->
+<section class="pt-32 pb-24 min-h-screen" id="shop">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="mb-16 text-center max-w-2xl mx-auto">
-<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">Our Services</h2>
+<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">Shop</h2>
 <div class="h-px w-24 bg-primary mx-auto mb-6 opacity-30"></div>
-<p class="font-body-md text-on-surface/60">A fusion of ancient wisdom and modern performance science. Book a consultation to begin your journey.</p>
+<p class="font-body-md text-on-surface/60">Wellness products, dispatched within the United Kingdom within 3&ndash;5 working days.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-  <div class="glass-card p-8">
-    <div class="w-16 h-16 mb-6 rounded-md border border-primary/20 flex items-center justify-center text-primary">
-      <span class="material-symbols-outlined text-4xl" aria-hidden="true">self_improvement</span>
-    </div>
-    <h3 class="font-headline-md text-primary mb-4">Wellness consulting/products</h3>
-    <p class="font-body-md text-on-surface/60">Bespoke wellness strategies and premium products designed to elevate your daily performance and comfort.</p>
-  </div>
-  <div class="glass-card p-8">
-    <div class="w-16 h-16 mb-6 rounded-md border border-primary/20 flex items-center justify-center text-primary">
-      <span class="material-symbols-outlined text-4xl" aria-hidden="true">graphic_eq</span>
-    </div>
-    <h3 class="font-headline-md text-primary mb-4">THz Frequency/HPT Therapy</h3>
-    <p class="font-body-md text-on-surface/60">Advanced therapeutic technologies utilizing Terahertz frequencies and Human Performance Technology.</p>
-  </div>
+<div id="shop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<p class="font-body-md text-on-surface/60 col-span-full text-center">Loading our range&hellip;</p>
 </div>
-</div>
-</section>
-<!-- My Approach Section - Asymmetric Bento Grid -->
-<section class="py-24 bg-surface-container-lowest" id="method">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="mb-16 text-center max-w-2xl mx-auto">
-<h2 class="font-headline-lg text-4xl md:text-headline-lg text-primary mb-4">The CASTTCO Method</h2>
-<div class="h-px w-24 bg-primary mx-auto mb-6 opacity-30"></div>
-<p class="font-body-md text-on-surface/60">A fusion of ancient wisdom and modern performance science, tailored for the discerning few.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[600px]">
-<!-- Item 1 -->
-<div class="md:col-span-4 glass-card p-10 flex flex-col justify-between hover:border-primary/40 transition-all group">
-<div>
-<span class="material-symbols-outlined text-primary text-4xl mb-6">self_improvement</span>
-<h3 class="font-headline-md text-headline-md mb-4 text-white">Mindful Performance</h3>
-<p class="font-body-md text-on-surface/60 leading-relaxed">Bespoke mindfulness and strategic wellness practices that give leaders the mental architecture to sustain restored energy under pressure.</p>
-</div>
-<a href="#explore-method" onclick="document.getElementById('explore-method').scrollIntoView({behavior: 'smooth'}); return false;" class="font-label-md text-primary tracking-widest mt-8 group-hover:translate-x-2 transition-transform cursor-pointer inline-flex items-center gap-2">
-                        EXPLORE METHOD <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- Item 2 -->
-<div class="md:col-span-8 relative overflow-hidden gold-border group">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-[3000ms] group-hover:scale-110" style="background-image: url('obsidian-marble-bento-bg.png')"></div>
-<div class="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all duration-500"></div>
-<div class="absolute bottom-10 left-10 max-w-md">
-<h3 class="font-headline-md text-headline-md text-white mb-2">Holistic Synchronicity</h3>
-<p class="font-body-md text-secondary-fixed/90">Harmonizing the physical, mental, and spiritual self into one cohesive peak state.</p>
-</div>
-</div>
-<!-- Item 3 -->
-<div class="md:col-span-7 relative bg-[#0a0a0a] gold-border overflow-hidden group flex rounded-2xl shadow-2xl">
-<img src="tesla_panoramic_1_1783857715980.png" alt="Nikola Tesla on energy, frequency and vibration" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-105 opacity-90">
-<!-- Seamless Edge Masking -->
-<div class="absolute inset-0 shadow-[inset_0_0_80px_30px_rgba(0,0,0,0.95)] pointer-events-none"></div>
-</div>
-<!-- Item 4 -->
-<div class="md:col-span-5 glass-card p-10 flex flex-col justify-center text-center">
-<div class="space-y-4">
-<span class="font-label-md text-primary tracking-widest block uppercase">The Core Goal</span>
-<p class="font-headline-md text-headline-md italic text-white/90">"True luxury is the clarity of mind achieved through absolute presence."</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- The 4 Phases of The CASTTCO Method -->
-<section id="explore-method" class="py-24 bg-surface-container-lowest border-y border-primary/10">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-  <div class="mb-16 text-center max-w-3xl mx-auto">
-    <span class="font-label-md text-primary tracking-widest block uppercase mb-4">The Framework</span>
-    <h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mb-6">A Premium Journey to Peak Performance</h2>
-    <div class="h-px w-24 bg-primary mx-auto opacity-30"></div>
-  </div>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    <!-- Phase 1 -->
-    <div class="glass-card p-8 group relative overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-500">
-      <div class="absolute -top-4 -right-2 opacity-[0.03] font-headline-lg text-9xl text-primary font-bold group-hover:scale-110 group-hover:opacity-10 transition-all duration-700 pointer-events-none">1</div>
-      <span class="text-xs text-primary/70 tracking-widest uppercase mb-4 block relative z-10 font-bold">Phase 1: The Frequency Audit</span>
-      <h3 class="font-headline-md text-2xl text-white mb-4 relative z-10">Assess & Calibrate</h3>
-      <p class="font-body-md text-on-surface/60 relative z-10 leading-relaxed">Before any intervention, we must understand the baseline. This phase involves a deep, holistic consultation to identify energetic blockages, physical stressors, and mental fatigue. We map the client’s current state of well-being, looking beyond surface symptoms to understand their unique vibrational signature and lifestyle demands.</p>
-    </div>
-    
-    <!-- Phase 2 -->
-    <div class="glass-card p-8 group relative overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-500">
-      <div class="absolute -top-4 -right-2 opacity-[0.03] font-headline-lg text-9xl text-primary font-bold group-hover:scale-110 group-hover:opacity-10 transition-all duration-700 pointer-events-none">2</div>
-      <span class="text-xs text-primary/70 tracking-widest uppercase mb-4 block relative z-10 font-bold">Phase 2: The Tech-Remedy Synthesis</span>
-      <h3 class="font-headline-md text-2xl text-white mb-4 relative z-10">Resonance & Restoration</h3>
-      <p class="font-body-md text-on-surface/60 relative z-10 leading-relaxed">This is the core intervention phase where ancient wisdom meets modern technology. We deploy THz Frequency and Human Performance Technology (HPT) to target cellular dissonance, paired seamlessly with Traditional Herbal Remedies to nourish the physical body. This non-invasive protocol gently forces the body and mind back into their natural, optimal frequencies.</p>
-    </div>
-    
-    <!-- Phase 3 -->
-    <div class="glass-card p-8 group relative overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-500">
-      <div class="absolute -top-4 -right-2 opacity-[0.03] font-headline-lg text-9xl text-primary font-bold group-hover:scale-110 group-hover:opacity-10 transition-all duration-700 pointer-events-none">3</div>
-      <span class="text-xs text-primary/70 tracking-widest uppercase mb-4 block relative z-10 font-bold">Phase 3: The Cognitive Anchor</span>
-      <h3 class="font-headline-md text-2xl text-white mb-4 relative z-10">Mindful Performance</h3>
-      <p class="font-body-md text-on-surface/60 relative z-10 leading-relaxed">True luxury is the clarity of mind achieved through absolute presence. As the physical body heals and re-energizes, we introduce bespoke mindfulness and strategic wellness practices. This equips leaders and high-performers with the mental architecture required to maintain their newly restored energy levels amidst high-stakes environments.</p>
-    </div>
-    
-    <!-- Phase 4 -->
-    <div class="glass-card p-8 group relative overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-500">
-      <div class="absolute -top-4 -right-2 opacity-[0.03] font-headline-lg text-9xl text-primary font-bold group-hover:scale-110 group-hover:opacity-10 transition-all duration-700 pointer-events-none">4</div>
-      <span class="text-xs text-primary/70 tracking-widest uppercase mb-4 block relative z-10 font-bold">Phase 4: Sustainable Optimization</span>
-      <h3 class="font-headline-md text-2xl text-white mb-4 relative z-10">Holistic Synchronicity</h3>
-      <p class="font-body-md text-on-surface/60 relative z-10 leading-relaxed">The final phase is ongoing optimization. Healing is not a one-time event; it is a lifestyle. We provide continuous wellness consulting, product curation, and data-driven adjustments to ensure that the client's physical, mental, and spiritual self remain harmonized in one cohesive peak state indefinitely.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- Testimonials / Success Stories -->
-<section class="py-24 relative obsidian-marble" id="testimonials">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div>
-<span class="font-label-md text-label-md tracking-widest text-primary uppercase">Client Success</span>
-<h2 class="font-headline-lg text-4xl md:text-headline-lg text-white mt-4 mb-8">Refined Perspectives</h2>
-<div class="space-y-12">
-<div class="border-l-2 border-primary/20 pl-8 relative">
-<span class="absolute -left-3 top-0 material-symbols-outlined text-primary bg-background">format_quote</span>
-<p class="font-body-lg text-body-lg text-secondary-fixed/80 italic mb-4">"Jeffery's approach is unlike anything in the standard wellness space. It's quiet, powerful, and deeply transformative for our executive team."</p>
-<span class="font-label-md text-label-md text-primary tracking-widest">— CEO, GLOBAL ARCHITECTURE FIRM</span>
-</div>
-<div class="border-l-2 border-primary/20 pl-8 relative">
-<span class="absolute -left-3 top-0 material-symbols-outlined text-primary bg-background">format_quote</span>
-<p class="font-body-lg text-body-lg text-secondary-fixed/80 italic mb-4">"The obsidian-level attention to detail in the CASTTCO method has fundamentally changed my relationship with stress and performance."</p>
-<span class="font-label-md text-label-md text-primary tracking-widest">— PRIVATE CLIENT, LONDON</span>
-</div>
-</div>
-</div>
-<div class="relative group">
-<div class="aspect-square gold-border overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s]" alt="A gold drop falling into a dark pool" loading="lazy" decoding="async" src="gold-drop-testimonial.png"/>
-</div>
-<div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 backdrop-blur-xl border border-primary/20"></div>
-</div>
-</div>
-</div>
-</section>
-<!-- Consultation Form -->
-<section class="py-24 bg-surface" id="contact">
-<div class="max-w-3xl mx-auto px-margin-mobile">
-<div class="text-center mb-16">
-<h2 class="font-display-lg text-display-lg text-primary mb-4">Contact Us</h2>
-<p class="font-body-md text-on-surface/60 tracking-wide">Enter the sanctuary where technology and nature make a difference together</p>
-</div>
-<form id="consultation-form" class="space-y-12" method="post" novalidate>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-<div class="relative">
-<label for="field-name" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Name</label>
-<input id="field-name" name="name" required autocomplete="name" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Your full name" type="text"/>
-</div>
-<div class="relative">
-<label for="field-email" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Email</label>
-<input id="field-email" name="email" required autocomplete="email" inputmode="email" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Email address" type="email"/>
-</div>
-</div>
-<div class="relative">
-<label for="field-service" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Select service</label>
-<select id="field-service" name="service" required class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md appearance-none transition-colors">
-<option class="bg-surface" value="" disabled selected>Choose a service…</option>
-<option class="bg-surface" value="Corporate Wellness Strategy">Corporate Wellness Strategy</option>
-<option class="bg-surface" value="Executive Coaching Sanctuary">Executive Coaching Sanctuary</option>
-<option class="bg-surface" value="Private Performance Retainer">Private Performance Retainer</option>
-</select>
-</div>
-<div class="relative">
-<label for="field-message" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Message</label>
-<textarea id="field-message" name="message" required class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Briefly describe your objectives" rows="4"></textarea>
-</div>
-<p id="form-status" role="status" aria-live="polite" class="text-center font-body-md text-on-surface/70 min-h-[1.5rem]"></p>
-<div class="flex justify-center pt-8">
-<button class="group relative px-12 py-5 bg-primary text-on-primary font-label-md text-label-md tracking-widest overflow-hidden transition-all duration-500 disabled:opacity-60" type="submit">
-<span class="relative z-10">REQUEST ACCESS</span>
-<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-</button>
-</div>
-</form>
 </div>
 </section>
 <!-- Footer -->
@@ -514,16 +293,16 @@
 <div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Navigation</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
-<li><a class="hover:text-primary transition-colors" href="#services">OUR PRODUCTS AND SERVICES</a></li>
-<li><a class="hover:text-primary transition-colors" href="#method">METHOD</a></li>
-<li><a class="hover:text-primary transition-colors" href="#about">ABOUT</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html#services">OUR PRODUCTS AND SERVICES</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html#method">METHOD</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html#about">ABOUT</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <span class="font-label-md text-label-md uppercase text-primary tracking-widest">Connect</span>
 <ul class="space-y-2 font-label-md text-on-surface/50">
-<li><a class="hover:text-primary transition-colors" href="#testimonials">TESTIMONIALS</a></li>
-<li><a class="hover:text-primary transition-colors" href="#contact">CONTACT</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html#testimonials">TESTIMONIALS</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html#contact">CONTACT</a></li>
 <li><a class="hover:text-primary transition-colors" href="terms.html">TERMS OF SERVICE</a></li>
 <li><a class="hover:text-primary transition-colors" href="refund-policy.html">REFUND POLICY</a></li>
 <li><a class="hover:text-primary transition-colors" href="privacy-policy.html">PRIVACY POLICY</a></li>
@@ -672,5 +451,35 @@ ${data.message}`;
             });
         })();
     </script>
+
+<!-- Basket -->
+<div id="basket-backdrop" class="fixed inset-0 bg-black/60 z-[60] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<aside id="basket-drawer" aria-hidden="true" aria-label="Your basket" class="fixed top-0 right-0 h-full w-full max-w-md bg-surface border-l border-primary/20 z-[70] translate-x-full transition-transform duration-500 flex flex-col">
+  <div class="flex items-center justify-between p-6 border-b border-primary/20">
+    <h2 class="font-headline-md text-primary">Your Basket</h2>
+    <button id="basket-close" type="button" aria-label="Close basket" class="text-on-surface/60 hover:text-primary p-2">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+  </div>
+  <div class="flex-grow overflow-y-auto px-6">
+    <p id="basket-empty" class="font-body-md text-on-surface/50 text-center py-12">Your basket is empty.</p>
+    <div id="basket-lines"></div>
+  </div>
+  <div class="p-6 border-t border-primary/20 space-y-4">
+    <div class="flex justify-between items-center">
+      <span class="font-body-md text-on-surface/60">Subtotal</span>
+      <span id="basket-subtotal" class="font-headline-md text-primary">&pound;0.00</span>
+    </div>
+    <p class="font-body-md text-on-surface/40 text-sm">Delivery is calculated at checkout.</p>
+    <p id="basket-note" hidden class="font-body-md text-primary text-sm"></p>
+    <button id="basket-checkout" type="button" disabled class="w-full bg-primary text-on-primary py-4 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed">
+      CHECKOUT
+    </button>
+  </div>
+</aside>
+
+<script src="js/config.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/shop.js"></script>
 
 </body></html>
