@@ -1,0 +1,56 @@
+#!/bin/sh
+#
+# Refuses a commit that contains real secret material.
+#
+# Stripe's own guidance is blunt about this: key exposure through source
+# repositories is the leading cause of key compromise, and a key is public the
+# moment it is pushed, not the moment someone notices. This repo had no
+# .gitignore at all until September 2026, so the habit is worth enforcing by
+# machine rather than by memory.
+#
+# Enable it once per clone:
+#   git config core.hooksPath .githooks
+#
+# Deliberately matches key MATERIAL, not key NAMES: .env.example ships
+# "STRIPE_SECRET_KEY=" with an empty value and the source comments mention
+# "sk_..." and "rk_...", all of which are meant to be committed.
+
+fail=0
+
+# Stripe secret, restricted and webhook signing secrets, live or test.
+stripe='(sk|rk|rkcs)_(test|live)_[A-Za-z0-9]{20,}|whsec_[A-Za-z0-9]{20,}'
+
+# Supabase service role keys are JWTs, and the legacy ones decode with
+# "service_role" in the payload. Either shape is fatal in a public repo.
+supabase='eyJ[A-Za-z0-9_-]{20,}\.eyJ[A-Za-z0-9_-]{20,}|sb_secret_[A-Za-z0-9_-]{20,}'
+
+for file in $(git diff --cached --name-only --diff-filter=ACM); do
+  [ -f "$file" ] || continue
+
+  if git show ":$file" | grep -qE "$stripe"; then
+    echo "BLOCKED: $file contains what looks like a live Stripe key."
+    fail=1
+  fi
+
+  if git show ":$file" | grep -qE "$supabase"; then
+    echo "BLOCKED: $file contains what looks like a Supabase service key."
+    fail=1
+  fi
+done
+
+if [ "$fail" -ne 0 ]; then
+  cat <<'EOF'
+
+Secrets belong in Vercel's environment variables, never in the repository.
+
+If this is a false positive, commit once with:
+  git commit --no-verify
+
+If it is real, do NOT just delete the line and commit. A key that reached a
+commit is compromised even if the commit is amended away: roll it at
+https://dashboard.stripe.com/apikeys first.
+EOF
+  exit 1
+fi
+
+exit 0
