@@ -4,8 +4,7 @@ node_modules/
 # Secrets. Nothing matching these may ever enter git history.
 # Stripe secret/restricted keys and the Supabase service role key live here
 # locally and in Vercel's environment variables in production.
-.env
-.env.*
+.env*
 !.env.example
 
 # Vercel CLI local state (contains the linked project id).
@@ -14,3 +13,4 @@ node_modules/
 # OS noise
 .DS_Store
 Thumbs.db
+
