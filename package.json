@@ -1,0 +1,10 @@
+{
+  "name": "casttco",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CASTTCO / Jeffery Ankrah wellness site. The pages are hand-written static HTML with no build step; this manifest exists only so Vercel installs the Stripe SDK for the serverless functions in /api.",
+  "type": "module",
+  "dependencies": {
+    "stripe": "^22.6.1"
+  }
+}
