@@ -12,6 +12,14 @@
  * Written as a Web-standard handler (a Request in, a Response out) rather than
  * the older (req, res) signature, because the webhook alongside it needs the
  * unparsed request body and this is the style that gives it.
+ *
+ * Exported as POST rather than as a default export, and that distinction is
+ * load-bearing on Vercel: a default export is invoked with the (req, res)
+ * signature, where the return value is ignored. Returning a Response from a
+ * default export does not fail loudly -- nothing ever calls res.end(), so the
+ * request simply hangs until the platform gives up. A named method export is
+ * what opts into the Web signature. Vercel answers 405 by itself for methods
+ * with no matching export, so there is no method check below.
  */
 import Stripe from 'stripe';
 import {
@@ -26,11 +34,7 @@ import {
   validateBooking
 } from './_lib/bookings.js';
 
-export default async function handler(request) {
-  if (request.method !== 'POST') {
-    return json({ error: 'Method not allowed.' }, 405);
-  }
-
+export async function POST(request) {
   const stripeKey = env('STRIPE_SECRET_KEY');
 
   /* Refuse clearly rather than half-working. An endpoint that took the

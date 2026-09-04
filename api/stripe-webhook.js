@@ -9,6 +9,11 @@
  * unverified webhook endpoint is an open invitation to mark any booking paid
  * by posting made-up JSON at it, so a bad or missing signature is refused
  * outright rather than logged and tolerated.
+ *
+ * Exported as POST, not as a default export. On Vercel a default export takes
+ * the (req, res) signature and its return value is discarded, so returning a
+ * Response hangs the request instead of answering it. See the longer note in
+ * create-booking-session.js.
  */
 import Stripe from 'stripe';
 import {
@@ -25,11 +30,7 @@ import {
  * deliberately-ignored both answer 200; only real failures answer 5xx. */
 const ACKNOWLEDGED = { received: true };
 
-export default async function handler(request) {
-  if (request.method !== 'POST') {
-    return json({ error: 'Method not allowed.' }, 405);
-  }
-
+export async function POST(request) {
   const stripeKey = env('STRIPE_SECRET_KEY');
   const webhookSecret = env('STRIPE_WEBHOOK_SECRET');
 

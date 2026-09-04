@@ -11,15 +11,16 @@
  * Only a summary is returned -- whether it is paid, what was booked and for
  * how much. The name, email, phone and notes on the booking stay server-side;
  * a session id in a URL is unguessable but it is not a password.
+ *
+ * Exported as GET, not as a default export. On Vercel a default export takes
+ * the (req, res) signature and its return value is discarded, so returning a
+ * Response hangs the request instead of answering it. See the longer note in
+ * create-booking-session.js.
  */
 import Stripe from 'stripe';
 import { env, json } from './_lib/bookings.js';
 
-export default async function handler(request) {
-  if (request.method !== 'GET') {
-    return json({ error: 'Method not allowed.' }, 405);
-  }
-
+export async function GET(request) {
   const stripeKey = env('STRIPE_SECRET_KEY');
   if (!stripeKey) {
     return json({ error: 'Booking is not switched on yet.' }, 503);
