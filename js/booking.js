@@ -211,11 +211,23 @@
     }
     renderCalendar();
 
+    /* On a phone the field is often near the bottom of the screen, and a panel
+     * that opens below it lands off the fold -- so it appears to have done
+     * nothing. Scroll it into view only when it is actually clipped, so the
+     * page does not jump about for no reason on a larger screen. */
+    var box = panel.getBoundingClientRect();
+    var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (box.bottom > viewportHeight) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
     // Focus the chosen day if there is one, otherwise the first bookable day,
     // so the keyboard lands somewhere useful instead of at the top of the grid.
     var target = panel.querySelector('button[aria-pressed="true"]') ||
       panel.querySelector('#cal-grid button:not([disabled])');
-    if (target) target.focus();
+    // preventScroll, because focusing a day would otherwise scroll the page a
+    // second time and undo the positioning just chosen above.
+    if (target) target.focus({ preventScroll: true });
   }
 
   function closeCalendar(returnFocus) {
@@ -265,7 +277,7 @@
       button.type = 'button';
       button.textContent = londonTime(iso);
       button.setAttribute('data-slot', iso);
-      button.className = 'border border-primary/40 text-primary px-5 py-3 ' +
+      button.className = 'w-full border border-primary/40 text-primary px-2 py-3 ' +
         'font-label-md text-label-md tracking-widest hover:bg-primary/10 ' +
         'transition-all duration-300';
       button.addEventListener('click', function () {
@@ -313,7 +325,7 @@
       b.className = (isChosen
         ? 'bg-primary text-on-primary'
         : 'border border-primary/40 text-primary hover:bg-primary/10') +
-        ' px-5 py-3 font-label-md text-label-md tracking-widest transition-all duration-300';
+        ' w-full px-2 py-3 font-label-md text-label-md tracking-widest transition-all duration-300';
     });
 
     var note = byId('slot-chosen');

@@ -322,7 +322,11 @@
 <!-- Floating, so opening it does not shunt the rest of the form down the
      page. Solid background on purpose: a translucent panel over a form is
      unreadable. -->
-<div id="cal-panel" hidden role="dialog" aria-modal="false" aria-label="Choose a date" class="absolute left-0 right-0 z-30 mt-2 p-4 bg-surface-container border border-primary/20 shadow-2xl">
+<!-- Width is capped rather than following the field. Left to stretch, a
+     calendar on a tablet becomes 80px squares strung across 600px, which
+     reads as a table rather than a month. Day cells want to stay about a
+     thumb wide at every size. -->
+<div id="cal-panel" hidden role="dialog" aria-modal="false" aria-label="Choose a date" class="absolute left-0 z-30 mt-2 w-full max-w-[23rem] p-3 sm:p-4 bg-surface-container border border-primary/20 shadow-2xl">
 
 <div class="flex items-center justify-between mb-4">
 <button id="cal-prev" type="button" aria-label="Previous month" class="w-10 h-10 flex items-center justify-center border border-primary/30 text-primary hover:bg-primary/10 disabled:opacity-25 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-colors">
@@ -353,7 +357,10 @@
 
 <div id="slot-times-wrap" hidden>
 <span class="block font-body-md text-on-surface/60 text-sm mb-3">Time</span>
-<div id="slot-times" class="flex flex-wrap gap-3"></div>
+<!-- A grid rather than a wrapping row: equal columns give every time the
+     same target size and a tidy edge, where flex-wrap left a ragged last
+     row of differently sized buttons. -->
+<div id="slot-times" class="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3 max-w-lg"></div>
 </div>
 </div>
 
