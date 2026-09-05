@@ -25,6 +25,7 @@ import Stripe from 'stripe';
 import {
   CURRENCY,
   consultationPricePence,
+  countRecentPending,
   env,
   insertBooking,
   json,
@@ -33,6 +34,11 @@ import {
   updateBooking,
   validateBooking
 } from './_lib/bookings.js';
+
+/* Generous enough that a real person abandoning checkout and trying again is
+ * never blocked, tight enough that a loop stops within seconds. */
+const MAX_PENDING_PER_EMAIL = 5;
+const PENDING_WINDOW_MINUTES = 60;
 
 export async function POST(request) {
   const stripeKey = env('STRIPE_SECRET_KEY');
@@ -57,6 +63,23 @@ export async function POST(request) {
   const checked = validateBooking(payload);
   if (!checked.ok) {
     return json({ error: checked.error }, 400);
+  }
+
+  /* Fails OPEN on purpose. If this check cannot run, the booking still goes
+   * through: turning away a paying customer because a defensive query errored
+   * is a worse outcome than letting one extra row through. */
+  try {
+    const recent = await countRecentPending(
+      checked.booking.email, PENDING_WINDOW_MINUTES, MAX_PENDING_PER_EMAIL
+    );
+    if (recent >= MAX_PENDING_PER_EMAIL) {
+      console.warn('[booking] pending cap reached for an address');
+      return json({
+        error: 'You already have a booking waiting for payment. Please complete or cancel it before starting another, or contact us and we will help.'
+      }, 429);
+    }
+  } catch (error) {
+    console.error('[booking] pending check failed, allowing anyway:', error.message);
   }
 
   let booking;

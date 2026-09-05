@@ -195,6 +195,41 @@ export async function updateBooking(id, patch) {
   return Array.isArray(rows) ? rows : [];
 }
 
+/* How many unpaid bookings this address has started recently.
+ *
+ * The booking endpoint is public, unauthenticated, and writes a row every time
+ * it is called, so something has to stand between it and a script in a loop.
+ *
+ * This is deliberately NOT a general rate limiter, and it should not be sold as
+ * one. A real limiter needs durable per-caller state, and the obvious key --
+ * the client IP -- is personal data under UK GDPR: storing it would mean saying
+ * so in the privacy policy and keeping it to a retention period, which is a
+ * poor trade for a site taking a handful of bookings a week. Capping by email
+ * uses a column already being stored for an obvious reason, and it stops the
+ * realistic cases: a stuck retry loop, a double-submitting form, one actor
+ * hammering the endpoint. It does not stop a distributed flood using fresh
+ * addresses each time, and if that ever happens the answer is a real limiter
+ * with durable storage, not a tighter number here. */
+export async function countRecentPending(email, windowMinutes, cap) {
+  const since = new Date(Date.now() - windowMinutes * 60000).toISOString();
+  const response = await fetch(
+    env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
+      '?select=id&status=eq.pending' +
+      '&email=eq.' + encodeURIComponent(email) +
+      '&created_at=gte.' + encodeURIComponent(since) +
+      // Only ever needs to know whether the cap is reached, so it never reads
+      // more rows than that regardless of how many are sitting there.
+      '&limit=' + (cap + 1),
+    { headers: supabaseHeaders() }
+  );
+
+  if (!response.ok) {
+    throw new Error('Pending count failed: ' + response.status);
+  }
+  const rows = await response.json();
+  return Array.isArray(rows) ? rows.length : 0;
+}
+
 export async function findBookingById(id) {
   const response = await fetch(
     env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
