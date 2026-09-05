@@ -66,6 +66,12 @@
     if (service) service.textContent = status.service || 'Consultation';
     if (amount) amount.textContent = shown || '—';
 
+    /* "Paid £50" while the message above says the payment is still clearing is
+     * a contradiction, and the kind that produces a worried email. The label
+     * follows the actual payment state: it is the amount until it is paid. */
+    var amountLabel = byId('confirm-amount-label');
+    if (amountLabel) amountLabel.textContent = status.paid ? 'Paid' : 'Amount';
+
     if (when && whenRow) {
       if (slot) {
         when.textContent = slot;
