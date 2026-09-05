@@ -310,8 +310,20 @@
 
 <div id="slot-picker" hidden>
 
-<!-- Month navigation. Buttons rather than a select, so a whole month of
-     availability is visible at a glance instead of one line at a time. -->
+<!-- The calendar is kept behind a field rather than always open. A permanent
+     grid dominates a short form, and most of a month is not bookable anyway. -->
+<div class="relative mb-8">
+<span class="block font-body-md text-on-surface/60 text-sm mb-2" id="cal-toggle-hint">Date</span>
+<button id="cal-toggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="cal-panel" aria-describedby="cal-toggle-hint" class="w-full flex items-center justify-between gap-4 bg-transparent border-b border-primary/30 py-3 text-left hover:border-primary focus:outline-none focus:border-primary transition-colors">
+<span id="cal-toggle-label" class="font-body-md text-on-surface/40">Select date</span>
+<span class="material-symbols-outlined text-primary" aria-hidden="true">calendar_month</span>
+</button>
+
+<!-- Floating, so opening it does not shunt the rest of the form down the
+     page. Solid background on purpose: a translucent panel over a form is
+     unreadable. -->
+<div id="cal-panel" hidden role="dialog" aria-modal="false" aria-label="Choose a date" class="absolute left-0 right-0 z-30 mt-2 p-4 bg-surface-container border border-primary/20 shadow-2xl">
+
 <div class="flex items-center justify-between mb-4">
 <button id="cal-prev" type="button" aria-label="Previous month" class="w-10 h-10 flex items-center justify-center border border-primary/30 text-primary hover:bg-primary/10 disabled:opacity-25 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-colors">
 <span class="material-symbols-outlined text-xl" aria-hidden="true">chevron_left</span>
@@ -336,8 +348,10 @@
 <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
 
 <p id="cal-empty" hidden class="font-body-md text-on-surface/50 text-sm mt-4"></p>
+</div>
+</div>
 
-<div id="slot-times-wrap" hidden class="mt-8">
+<div id="slot-times-wrap" hidden>
 <span class="block font-body-md text-on-surface/60 text-sm mb-3">Time</span>
 <div id="slot-times" class="flex flex-wrap gap-3"></div>
 </div>

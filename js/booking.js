@@ -188,6 +188,63 @@
     renderCalendar();
   }
 
+  /* ------------------------------------------------------------ open/close */
+
+  function calendarOpen() {
+    var panel = byId('cal-panel');
+    return panel && !panel.hidden;
+  }
+
+  function openCalendar() {
+    var panel = byId('cal-panel');
+    var toggle = byId('cal-toggle');
+    if (!panel) return;
+
+    panel.hidden = false;
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+
+    // Land on the selected month rather than wherever the user last browsed,
+    // so reopening shows the date they already chose.
+    if (selectedDate) {
+      var p = dateParts(selectedDate);
+      view = { year: p.year, month: p.month };
+    }
+    renderCalendar();
+
+    // Focus the chosen day if there is one, otherwise the first bookable day,
+    // so the keyboard lands somewhere useful instead of at the top of the grid.
+    var target = panel.querySelector('button[aria-pressed="true"]') ||
+      panel.querySelector('#cal-grid button:not([disabled])');
+    if (target) target.focus();
+  }
+
+  function closeCalendar(returnFocus) {
+    var panel = byId('cal-panel');
+    var toggle = byId('cal-toggle');
+    if (!panel || panel.hidden) return;
+
+    panel.hidden = true;
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      // Only on a deliberate close. Doing it after a click elsewhere would
+      // yank focus away from whatever the visitor just reached for.
+      if (returnFocus) toggle.focus();
+    }
+  }
+
+  function setToggleLabel() {
+    var label = byId('cal-toggle-label');
+    if (!label) return;
+
+    if (selectedDate) {
+      label.textContent = longDate(selectedDate);
+      label.className = 'font-body-md text-white';
+    } else {
+      label.textContent = 'Select date';
+      label.className = 'font-body-md text-on-surface/40';
+    }
+  }
+
   /* ------------------------------------------------------------ selection */
 
   function renderTimes() {
@@ -229,7 +286,17 @@
     if (note) note.hidden = true;
 
     renderCalendar();
+    setToggleLabel();
     renderTimes();
+
+    /* Picking a date is the whole job of the calendar, so it closes itself and
+     * hands over to the times below rather than sitting open on top of them. */
+    closeCalendar(false);
+    var times = byId('slot-times-wrap');
+    if (times && !times.hidden) {
+      var first = times.querySelector('button');
+      if (first) first.focus();
+    }
   }
 
   function chooseTime(iso) {
@@ -265,6 +332,7 @@
     if (note) note.hidden = true;
     var box = byId('slot-times-wrap');
     if (box) box.hidden = true;
+    setToggleLabel();
   }
 
   /* --------------------------------------------------------- availability */
@@ -399,6 +467,28 @@
     if (prev) prev.addEventListener('click', function () { shiftMonth(-1); });
     if (next) next.addEventListener('click', function () { shiftMonth(1); });
 
+    var toggle = byId('cal-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        if (calendarOpen()) closeCalendar(true); else openCalendar();
+      });
+    }
+
+    /* A panel floating over the form has to close on the two things people
+     * reflexively do to dismiss one. Without these it can only be closed by
+     * finding the control that opened it, which is a trap on a phone. */
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && calendarOpen()) closeCalendar(true);
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!calendarOpen()) return;
+      var panel = byId('cal-panel');
+      var button = byId('cal-toggle');
+      if (panel.contains(event.target) || (button && button.contains(event.target))) return;
+      closeCalendar(false);
+    });
+
     /* Someone who abandons Stripe's page comes back to ?cancelled=1. Saying
      * plainly that no money was taken heads off the obvious worry. */
     if (window.location.search.indexOf('cancelled=1') !== -1) {
@@ -424,6 +514,9 @@
           : 'Please choose a date and time for your appointment.', 'error');
         var picker = byId('slot-picker');
         if (picker) picker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Open the calendar for them rather than leaving them to work out which
+        // control the complaint is about.
+        if (!selectedDate) openCalendar();
         return;
       }
 
