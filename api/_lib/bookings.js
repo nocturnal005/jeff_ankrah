@@ -74,17 +74,14 @@ function looksLikeEmail(value) {
   return /^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(value);
 }
 
-/* Accepts YYYY-MM-DD only, and refuses dates in the past. Date is a
- * preference, not a confirmed slot, so a wide future window is fine; a booking
- * for last week is a typo or a bot. */
-function normaliseDate(value) {
-  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
-  const parsed = new Date(value + 'T00:00:00Z');
-  if (Number.isNaN(parsed.getTime())) return null;
-  const today = new Date();
-  const startOfToday = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
-  if (parsed.getTime() < startOfToday) return null;
-  return value;
+/* The London calendar date an instant falls on. Appointments are stored in UTC,
+ * but a 17:00 booking in June is 16:00 UTC, and reading the date straight off
+ * the UTC value would put a late-evening appointment on the wrong day. */
+function londonDateOf(instant) {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/London',
+    year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(instant);
 }
 
 /* Returns { ok: true, booking } or { ok: false, error }. The error text is
@@ -116,6 +113,15 @@ export function validateBooking(input) {
     return { ok: false, error: 'Please choose one of the listed services.' };
   }
 
+  /* The chosen appointment, as an instant. Only the shape is checked here;
+   * whether it is a real, free, still-bookable slot is decided against the
+   * diary by the caller. A well-formed time is not the same as an available
+   * one, and only the second matters. */
+  const startsAt = typeof input.starts_at === 'string' ? new Date(input.starts_at) : null;
+  if (!startsAt || Number.isNaN(startsAt.getTime())) {
+    return { ok: false, error: 'Please choose an appointment time.' };
+  }
+
   return {
     ok: true,
     booking: {
@@ -123,7 +129,10 @@ export function validateBooking(input) {
       email,
       phone: clean(input.phone, LIMITS.phone) || null,
       service,
-      preferred_date: normaliseDate(input.preferred_date),
+      starts_at: startsAt.toISOString(),
+      // Kept in step with the booked slot so the date is readable in the table
+      // editor without converting from UTC in your head.
+      preferred_date: londonDateOf(startsAt),
       notes: clean(input.notes, LIMITS.notes) || null,
       price_pence: consultationPricePence(),
       currency: 'GBP',
@@ -164,7 +173,21 @@ export async function insertBooking(booking) {
   if (!response.ok) {
     // The response body can echo column names and constraint text. Useful in a
     // server log, never in something the visitor sees.
-    throw new Error('Booking insert failed: ' + response.status + ' ' + (await response.text()));
+    const detail = await response.text();
+
+    /* 23505 is Postgres refusing a duplicate key, which here means the unique
+     * index on the slot rejected a second booking for the same time. That is
+     * not a fault: it is two people having clicked the same slot, and the
+     * database deciding the race the application could not. The caller turns it
+     * into "pick another time" rather than an error, and crucially it happens
+     * before anyone is charged. */
+    if (detail.includes('23505') || /duplicate key/i.test(detail)) {
+      const clash = new Error('Slot already taken');
+      clash.slotTaken = true;
+      throw clash;
+    }
+
+    throw new Error('Booking insert failed: ' + response.status + ' ' + detail);
   }
 
   const rows = await response.json();
@@ -193,6 +216,75 @@ export async function updateBooking(id, patch) {
   // matched nothing looks exactly like a successful one.
   const rows = await response.json();
   return Array.isArray(rows) ? rows : [];
+}
+
+/* ------------------------------------------------------------------- slots */
+
+export async function fetchAvailability() {
+  const response = await fetch(
+    env('SUPABASE_URL') + '/rest/v1/consultation_availability' +
+      '?select=weekday,start_time,end_time,is_active&is_active=eq.true',
+    { headers: supabaseHeaders() }
+  );
+  if (!response.ok) throw new Error('Availability read failed: ' + response.status);
+  return response.json();
+}
+
+export async function fetchBlackouts(fromDate, toDate) {
+  const response = await fetch(
+    env('SUPABASE_URL') + '/rest/v1/consultation_blackouts' +
+      '?select=blackout_date' +
+      '&blackout_date=gte.' + encodeURIComponent(fromDate) +
+      '&blackout_date=lte.' + encodeURIComponent(toDate),
+    { headers: supabaseHeaders() }
+  );
+  if (!response.ok) throw new Error('Blackout read failed: ' + response.status);
+  const rows = await response.json();
+  return rows.map((r) => r.blackout_date);
+}
+
+/* Slots that are spoken for. A pending booking counts: someone is at Stripe's
+ * page with their card out, and selling their slot to somebody else while they
+ * type would be worse than briefly showing one fewer time. */
+export async function fetchTakenSlots(fromIso, toIso) {
+  const response = await fetch(
+    env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
+      '?select=starts_at&starts_at=not.is.null' +
+      '&status=in.(pending,paid,confirmed,completed)' +
+      '&starts_at=gte.' + encodeURIComponent(fromIso) +
+      '&starts_at=lte.' + encodeURIComponent(toIso),
+    { headers: supabaseHeaders() }
+  );
+  if (!response.ok) throw new Error('Taken slot read failed: ' + response.status);
+  const rows = await response.json();
+  return rows.map((r) => r.starts_at);
+}
+
+/* Releases slots held by checkouts nobody completed.
+ *
+ * The webhook already cancels a booking when Stripe reports the session
+ * expired, and that is the reliable path. This is the belt to its braces: if a
+ * webhook is ever missed or delayed, a slot would otherwise stay held until
+ * someone noticed. Sweeping on read means availability heals itself.
+ *
+ * The window matches the Stripe session lifetime set at checkout, so a slot is
+ * never released while its customer could still legitimately pay for it. */
+export async function releaseStalePending(olderThanMinutes) {
+  const cutoff = new Date(Date.now() - olderThanMinutes * 60000).toISOString();
+  const response = await fetch(
+    env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
+      '?status=eq.pending&created_at=lt.' + encodeURIComponent(cutoff),
+    {
+      method: 'PATCH',
+      headers: { ...supabaseHeaders(), Prefer: 'return=representation' },
+      body: JSON.stringify({ status: 'cancelled' })
+    }
+  );
+  if (!response.ok) {
+    throw new Error('Stale release failed: ' + response.status);
+  }
+  const rows = await response.json();
+  return Array.isArray(rows) ? rows.length : 0;
 }
 
 /* How many unpaid bookings this address has started recently.

@@ -40,15 +40,42 @@
     setIcon(icon);
   }
 
+  /* The booked appointment in London time. Stored as UTC, so a 4pm session
+   * would otherwise read as 3pm to anyone whose device is set elsewhere -- and
+   * the one number on this page nobody can afford to misread is when to turn
+   * up. */
+  function londonSlot(iso) {
+    var when = new Date(iso);
+    if (isNaN(when.getTime())) return null;
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      weekday: 'long', day: 'numeric', month: 'long',
+      hour: 'numeric', minute: '2-digit', hour12: true
+    }).format(when);
+  }
+
   function showDetail(status) {
     var detail = byId('confirm-detail');
     var service = byId('confirm-service');
     var amount = byId('confirm-amount');
+    var when = byId('confirm-when');
+    var whenRow = byId('confirm-when-row');
     var shown = money(status.amount_pence, status.currency);
+    var slot = status.starts_at ? londonSlot(status.starts_at) : null;
 
     if (service) service.textContent = status.service || 'Consultation';
     if (amount) amount.textContent = shown || '—';
-    if (detail && (status.service || shown)) detail.hidden = false;
+
+    if (when && whenRow) {
+      if (slot) {
+        when.textContent = slot;
+        whenRow.hidden = false;
+      } else {
+        whenRow.hidden = true;
+      }
+    }
+
+    if (detail && (status.service || shown || slot)) detail.hidden = false;
   }
 
   function init() {
@@ -86,7 +113,7 @@
       if (result.body.paid) {
         render(
           'Your consultation is booked',
-          'Thank you. Your payment has gone through and your booking is confirmed.',
+          'Thank you. Your payment has gone through and your appointment is confirmed.',
           'check_circle'
         );
         showDetail(result.body);

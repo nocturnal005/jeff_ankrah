@@ -27,6 +27,9 @@ import {
   consultationPricePence,
   countRecentPending,
   env,
+  fetchAvailability,
+  fetchBlackouts,
+  fetchTakenSlots,
   insertBooking,
   json,
   siteUrl,
@@ -34,6 +37,18 @@ import {
   updateBooking,
   validateBooking
 } from './_lib/bookings.js';
+import {
+  HORIZON_DAYS,
+  addDays,
+  describeSlot,
+  isBookable,
+  londonToday
+} from './_lib/slots.js';
+
+/* Stripe's floor is 30 minutes, and short is what we want: an unpaid booking
+ * holds a real appointment slot, so the sooner an abandoned checkout dies the
+ * sooner that time is back on sale. */
+const SESSION_MINUTES = 30;
 
 /* Generous enough that a real person abandoning checkout and trying again is
  * never blocked, tight enough that a loop stops within seconds. */
@@ -65,6 +80,35 @@ export async function POST(request) {
     return json({ error: checked.error }, 400);
   }
 
+  /* The slot the browser asked for, checked against the diary rather than
+   * taken on trust. The page offered a set of times some seconds ago; this
+   * request claims one. Those are different things, and only the second is
+   * under the caller's control -- so a slot outside working hours, on a closed
+   * day, inside the notice period, or already taken is refused here.
+   *
+   * Fails CLOSED, unlike the abuse cap below. A booking whose availability
+   * could not be confirmed is a booking that might double-book a real client,
+   * and refusing to take money is the safer half of that trade. */
+  try {
+    const [availability, blackouts, taken] = await Promise.all([
+      fetchAvailability(),
+      fetchBlackouts(londonToday(), addDays(londonToday(), HORIZON_DAYS)),
+      fetchTakenSlots(new Date().toISOString(),
+        new Date(Date.now() + HORIZON_DAYS * 86400000).toISOString())
+    ]);
+
+    if (!isBookable(checked.booking.starts_at, { availability, blackouts, taken, now: new Date() })) {
+      return json({
+        error: 'That time is no longer available. Please choose another.'
+      }, 409);
+    }
+  } catch (error) {
+    console.error('[booking] availability check failed:', error.message);
+    return json({
+      error: 'We could not confirm that time just now. Please try again shortly.'
+    }, 503);
+  }
+
   /* Fails OPEN on purpose. If this check cannot run, the booking still goes
    * through: turning away a paying customer because a defensive query errored
    * is a worse outcome than letting one extra row through. */
@@ -86,6 +130,14 @@ export async function POST(request) {
   try {
     booking = await insertBooking(checked.booking);
   } catch (error) {
+    /* Two people clicked the same slot and the unique index decided it. The
+     * loser is told to pick again, and nobody has been charged -- which is the
+     * entire reason the slot is claimed before Stripe is involved. */
+    if (error.slotTaken) {
+      return json({
+        error: 'Someone just booked that time. Please choose another.'
+      }, 409);
+    }
     console.error('[booking] insert failed:', error.message);
     return json({ error: 'We could not start your booking. Please try again shortly.' }, 500);
   }
@@ -133,8 +185,12 @@ export async function POST(request) {
       metadata: {
         booking_id: booking.id,
         service: booking.service,
-        preferred_date: booking.preferred_date || ''
+        starts_at: booking.starts_at || ''
       },
+      /* Short-lived on purpose: this booking is holding an appointment slot,
+       * and the slot cannot go back on sale until the session can no longer be
+       * paid. */
+      expires_at: Math.floor(Date.now() / 1000) + SESSION_MINUTES * 60,
       line_items: [{
         quantity: 1,
         price_data: {
@@ -142,7 +198,9 @@ export async function POST(request) {
           unit_amount: amount,
           product_data: {
             name: 'CASTTCO consultation',
-            description: booking.service
+            // The appointment itself, on Stripe's page and on the receipt, so
+            // what someone is paying for is legible without cross-referencing.
+            description: booking.service + ' — ' + describeSlot(booking.starts_at)
           }
         }
       }],

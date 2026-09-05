@@ -286,12 +286,6 @@
 <input id="booking-phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" placeholder="Contact number" type="tel"/>
 </div>
 <div class="relative">
-<label for="booking-date" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Preferred date <span class="text-on-surface/40 normal-case tracking-normal">(optional)</span></label>
-<input id="booking-date" name="preferred_date" class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md transition-colors" type="date"/>
-</div>
-</div>
-
-<div class="relative">
 <label for="booking-service" class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Select service</label>
 <select id="booking-service" name="service" required class="w-full bg-transparent border-b border-primary/30 py-3 focus:outline-none focus:border-primary text-white font-body-md appearance-none transition-colors">
 <option class="bg-surface" value="" disabled selected>Choose a service&hellip;</option>
@@ -300,6 +294,33 @@
 <option class="bg-surface" value="Executive Coaching Sanctuary">Executive Coaching Sanctuary</option>
 <option class="bg-surface" value="Private Performance Retainer">Private Performance Retainer</option>
 </select>
+</div>
+</div>
+
+<!-- Appointment picker. Populated from /api/availability; the page never
+     works out availability itself, because that would mean shipping the
+     diary to the browser. -->
+<div class="relative">
+<span class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-2">Choose your appointment</span>
+<p class="font-body-md text-on-surface/40 text-sm mb-6">60 minutes, London time. Times shown are available now &mdash; a slot is held for you for 30 minutes once you continue to payment.</p>
+
+<div id="slot-loading" class="font-body-md text-on-surface/50 py-4">Loading available times&hellip;</div>
+
+<div id="slot-error" hidden class="font-body-md text-error py-4"></div>
+
+<div id="slot-picker" hidden>
+<label for="slot-date" class="block font-body-md text-on-surface/60 text-sm mb-2">Date</label>
+<select id="slot-date" class="w-full bg-transparent border-b border-primary/30 py-3 mb-6 focus:outline-none focus:border-primary text-white font-body-md appearance-none transition-colors"></select>
+
+<span class="block font-body-md text-on-surface/60 text-sm mb-3">Time</span>
+<div id="slot-times" class="flex flex-wrap gap-3"></div>
+</div>
+
+<p id="slot-chosen" hidden class="font-body-md text-primary mt-6"></p>
+
+<!-- What the server is actually sent. The visible controls are a convenience;
+     this is the value, and it is re-checked against the diary server-side. -->
+<input id="booking-starts-at" name="starts_at" type="hidden"/>
 </div>
 
 <div class="relative">

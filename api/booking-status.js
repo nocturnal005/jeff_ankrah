@@ -47,6 +47,9 @@ export async function GET(request) {
       paid: session.payment_status === 'paid',
       payment_status: session.payment_status,
       service: (session.metadata && session.metadata.service) || null,
+      // The appointment itself, so the confirmation can state when they are
+      // expected rather than promising to be in touch about it.
+      starts_at: (session.metadata && session.metadata.starts_at) || null,
       amount_pence: session.amount_total,
       currency: session.currency
     });
