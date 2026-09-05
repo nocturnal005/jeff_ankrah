@@ -1,20 +1,22 @@
 /*
  * CASTTCO consultation booking.
  *
- * Loads the free appointment slots from /api/availability, lets the visitor
- * pick one, and hands the booking to /api/create-booking-session, which returns
+ * Loads free appointment slots from /api/availability, shows them as a month
+ * calendar, and hands the booking to /api/create-booking-session, which returns
  * a Stripe Checkout URL to follow.
  *
  * Two things this file deliberately does not do.
  *
- * It does not work out availability. The server sends a list of free times and
- * this renders them. Deciding it here would mean shipping the diary to the
- * browser, and the diary is a record of when a named person is with a client.
+ * It does not work out availability. The server sends the free times and this
+ * renders them. Deciding it here would mean shipping the diary to the browser,
+ * and the diary is a record of when a named person is with a client. A day with
+ * no free slots is simply absent from the response, so an empty square on the
+ * calendar says "nothing available" without saying why.
  *
  * It does not send a price, and it is not trusted about the slot either. The
- * amount is set server-side, and the chosen time is re-checked against the
- * diary before anything is written, because a time this page offered some
- * seconds ago and a time claimed in a request are not the same thing.
+ * amount is set server-side, and the chosen time is rechecked against the diary
+ * before anything is written, because a time this page offered some seconds ago
+ * and a time claimed in a request are not the same thing.
  */
 (function () {
   'use strict';
@@ -25,7 +27,10 @@
   var ENDPOINT = '/api/create-booking-session';
   var AVAILABILITY = '/api/availability';
 
-  var days = [];
+  var days = [];          // [{ date: 'YYYY-MM-DD', slots: [iso] }]
+  var byDate = {};
+  var view = null;        // { year, month } of the visible month, month 0-11
+  var selectedDate = null;
   var chosen = null;
 
   /* ---------------------------------------------------------------- utils */
@@ -54,36 +59,149 @@
     }).format(new Date(iso));
   }
 
-  function londonDate(dateStr) {
-    var parts = dateStr.split('-');
-    var utc = new Date(Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])));
-    return new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long'
-    }).format(utc);
+  /* A bare date has no timezone, so it is read as UTC and formatted as UTC.
+   * Treating it as local would shift the label a day for anyone west of here. */
+  function dateParts(dateStr) {
+    var p = dateStr.split('-').map(Number);
+    return { year: p[0], month: p[1] - 1, day: p[2] };
   }
 
-  /* ---------------------------------------------------------- availability */
+  function longDate(dateStr) {
+    var p = dateParts(dateStr);
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long'
+    }).format(new Date(Date.UTC(p.year, p.month, p.day)));
+  }
 
-  function showSlotError(message) {
-    var box = byId('slot-error');
-    var loading = byId('slot-loading');
-    var picker = byId('slot-picker');
-    if (loading) loading.hidden = true;
-    if (picker) picker.hidden = true;
-    if (box) {
-      box.textContent = message;
-      box.hidden = false;
+  function monthName(year, month) {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'UTC', month: 'long', year: 'numeric'
+    }).format(new Date(Date.UTC(year, month, 1)));
+  }
+
+  /* Monday-first column index, as a UK diary reads. getUTCDay is Sunday-first. */
+  function mondayIndex(year, month, day) {
+    return (new Date(Date.UTC(year, month, day)).getUTCDay() + 6) % 7;
+  }
+
+  function daysInMonth(year, month) {
+    return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  }
+
+  function pad(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+
+  function key(year, month, day) {
+    return year + '-' + pad(month + 1) + '-' + pad(day);
+  }
+
+  /* ------------------------------------------------------------- calendar */
+
+  function monthsSpanned() {
+    if (!days.length) return { first: null, last: null };
+    var a = dateParts(days[0].date);
+    var b = dateParts(days[days.length - 1].date);
+    return {
+      first: { year: a.year, month: a.month },
+      last: { year: b.year, month: b.month }
+    };
+  }
+
+  function monthValue(m) {
+    return m.year * 12 + m.month;
+  }
+
+  function renderCalendar() {
+    var grid = byId('cal-grid');
+    var label = byId('cal-month');
+    var prev = byId('cal-prev');
+    var next = byId('cal-next');
+    var empty = byId('cal-empty');
+    if (!grid || !view) return;
+
+    label.textContent = monthName(view.year, view.month);
+    grid.textContent = '';
+
+    var span = monthsSpanned();
+    if (prev) prev.disabled = monthValue(view) <= monthValue(span.first);
+    if (next) next.disabled = monthValue(view) >= monthValue(span.last);
+
+    // Blank cells so the first of the month lands under the right weekday.
+    var lead = mondayIndex(view.year, view.month, 1);
+    for (var b = 0; b < lead; b++) {
+      grid.appendChild(document.createElement('span'));
+    }
+
+    var total = daysInMonth(view.year, view.month);
+    var offered = 0;
+
+    for (var d = 1; d <= total; d++) {
+      var dateStr = key(view.year, view.month, d);
+      var day = byDate[dateStr];
+      var cell = document.createElement('button');
+      cell.type = 'button';
+      cell.textContent = String(d);
+
+      if (day) {
+        offered++;
+        var isSelected = dateStr === selectedDate;
+        cell.className = 'aspect-square flex items-center justify-center ' +
+          'font-body-md text-sm transition-colors ' +
+          (isSelected
+            ? 'bg-primary text-on-primary'
+            : 'border border-primary/40 text-primary hover:bg-primary/10');
+        cell.setAttribute('aria-label',
+          longDate(dateStr) + ', ' + day.slots.length +
+          (day.slots.length === 1 ? ' time available' : ' times available'));
+        cell.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        cell.setAttribute('data-date', dateStr);
+        cell.addEventListener('click', function () {
+          selectDay(this.getAttribute('data-date'));
+        });
+      } else {
+        // Unavailable rather than hidden: an empty square still shows the shape
+        // of the month, which a missing cell would not.
+        cell.className = 'aspect-square flex items-center justify-center ' +
+          'font-body-md text-sm text-on-surface/20 cursor-not-allowed';
+        cell.disabled = true;
+        cell.setAttribute('aria-label', longDate(dateStr) + ', no appointments');
+      }
+
+      grid.appendChild(cell);
+    }
+
+    if (empty) {
+      if (offered) {
+        empty.hidden = true;
+      } else {
+        empty.textContent = 'No appointments available in ' +
+          monthName(view.year, view.month) + '. Try another month.';
+        empty.hidden = false;
+      }
     }
   }
 
+  function shiftMonth(delta) {
+    var v = new Date(Date.UTC(view.year, view.month + delta, 1));
+    view = { year: v.getUTCFullYear(), month: v.getUTCMonth() };
+    renderCalendar();
+  }
+
+  /* ------------------------------------------------------------ selection */
+
   function renderTimes() {
     var wrap = byId('slot-times');
-    var select = byId('slot-date');
-    if (!wrap || !select) return;
+    var box = byId('slot-times-wrap');
+    if (!wrap) return;
 
-    var day = days.filter(function (d) { return d.date === select.value; })[0];
     wrap.textContent = '';
-    if (!day) return;
+    var day = byDate[selectedDate];
+
+    if (!day) {
+      if (box) box.hidden = true;
+      return;
+    }
 
     day.slots.forEach(function (iso) {
       var button = document.createElement('button');
@@ -93,12 +211,28 @@
       button.className = 'border border-primary/40 text-primary px-5 py-3 ' +
         'font-label-md text-label-md tracking-widest hover:bg-primary/10 ' +
         'transition-all duration-300';
-      button.addEventListener('click', function () { choose(iso); });
+      button.addEventListener('click', function () {
+        chooseTime(this.getAttribute('data-slot'));
+      });
       wrap.appendChild(button);
     });
+
+    if (box) box.hidden = false;
   }
 
-  function choose(iso) {
+  function selectDay(dateStr) {
+    selectedDate = dateStr;
+    chosen = null;
+    var field = byId('booking-starts-at');
+    if (field) field.value = '';
+    var note = byId('slot-chosen');
+    if (note) note.hidden = true;
+
+    renderCalendar();
+    renderTimes();
+  }
+
+  function chooseTime(iso) {
     chosen = iso;
 
     var field = byId('booking-starts-at');
@@ -110,52 +244,41 @@
     Array.prototype.forEach.call(buttons, function (b) {
       var isChosen = b.getAttribute('data-slot') === iso;
       b.className = (isChosen
-        ? 'bg-primary text-on-primary '
-        : 'border border-primary/40 text-primary hover:bg-primary/10 ') +
-        'px-5 py-3 font-label-md text-label-md tracking-widest transition-all duration-300' +
-        (isChosen ? '' : ' border');
+        ? 'bg-primary text-on-primary'
+        : 'border border-primary/40 text-primary hover:bg-primary/10') +
+        ' px-5 py-3 font-label-md text-label-md tracking-widest transition-all duration-300';
     });
 
     var note = byId('slot-chosen');
     if (note) {
-      var select = byId('slot-date');
-      note.textContent = 'Booking ' + londonDate(select.value) + ' at ' + londonTime(iso) + '.';
+      note.textContent = 'Booking ' + longDate(selectedDate) + ' at ' + londonTime(iso) + '.';
       note.hidden = false;
     }
   }
 
   function clearChoice() {
     chosen = null;
+    selectedDate = null;
     var field = byId('booking-starts-at');
     if (field) field.value = '';
     var note = byId('slot-chosen');
     if (note) note.hidden = true;
+    var box = byId('slot-times-wrap');
+    if (box) box.hidden = true;
   }
 
-  function renderDates() {
-    var select = byId('slot-date');
+  /* --------------------------------------------------------- availability */
+
+  function showSlotError(message) {
+    var box = byId('slot-error');
     var loading = byId('slot-loading');
     var picker = byId('slot-picker');
-    if (!select) return;
-
-    if (!days.length) {
-      showSlotError('There are no appointments available at the moment. Please contact us and we will arrange one directly.');
-      return;
-    }
-
-    select.textContent = '';
-    days.forEach(function (day) {
-      var option = document.createElement('option');
-      option.value = day.date;
-      option.className = 'bg-surface';
-      option.textContent = londonDate(day.date) + ' (' + day.slots.length +
-        (day.slots.length === 1 ? ' time' : ' times') + ')';
-      select.appendChild(option);
-    });
-
     if (loading) loading.hidden = true;
-    if (picker) picker.hidden = false;
-    renderTimes();
+    if (picker) picker.hidden = true;
+    if (box) {
+      box.textContent = message;
+      box.hidden = false;
+    }
   }
 
   function loadAvailability() {
@@ -171,9 +294,28 @@
             'We could not load available times. Please contact us and we will book you in directly.');
           return;
         }
+
         days = (result.body && result.body.days) || [];
+        byDate = {};
+        days.forEach(function (day) { byDate[day.date] = day; });
+
+        if (!days.length) {
+          showSlotError('There are no appointments available at the moment. Please contact us and we will arrange one directly.');
+          return;
+        }
+
         clearChoice();
-        renderDates();
+
+        // Open on the first month that actually has something in it.
+        var first = dateParts(days[0].date);
+        view = { year: first.year, month: first.month };
+
+        var loading = byId('slot-loading');
+        var picker = byId('slot-picker');
+        if (loading) loading.hidden = true;
+        if (picker) picker.hidden = false;
+
+        renderCalendar();
       })
       .catch(function (error) {
         if (window.console) window.console.error(error);
@@ -227,9 +369,9 @@
         'We could not start your booking just now. Please try again shortly.', 'error');
 
       /* Somebody took the slot in the seconds between this page loading and the
-       * form being submitted. Reloading availability means the visitor sees a
-       * corrected list rather than being told to try again against times that
-       * are no longer real. */
+       * form being submitted. Reloading means the visitor sees a corrected
+       * calendar rather than being told to try again against times that are no
+       * longer real. */
       if (result.status === 409) loadAvailability();
     }).catch(function (error) {
       if (window.console) window.console.error(error);
@@ -252,13 +394,10 @@
     renderPrice();
     loadAvailability();
 
-    var select = byId('slot-date');
-    if (select) {
-      select.addEventListener('change', function () {
-        clearChoice();
-        renderTimes();
-      });
-    }
+    var prev = byId('cal-prev');
+    var next = byId('cal-next');
+    if (prev) prev.addEventListener('click', function () { shiftMonth(-1); });
+    if (next) next.addEventListener('click', function () { shiftMonth(1); });
 
     /* Someone who abandons Stripe's page comes back to ?cancelled=1. Saying
      * plainly that no money was taken heads off the obvious worry. */
@@ -280,7 +419,9 @@
       // Checked here as well as on the server, so the visitor is told before
       // they wait on a request that was never going to succeed.
       if (!chosen) {
-        say(status, 'Please choose an appointment time.', 'error');
+        say(status, selectedDate
+          ? 'Please choose a time for your appointment.'
+          : 'Please choose a date and time for your appointment.', 'error');
         var picker = byId('slot-picker');
         if (picker) picker.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
