@@ -325,7 +325,9 @@ export async function countRecentPending(email, windowMinutes, cap) {
 export async function findBookingById(id) {
   const response = await fetch(
     env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
-      '?select=id,status,price_pence,currency,email,name,service' +
+      // Enough to write the confirmation email without a second read: the
+      // webhook is the only moment we know a booking has just been paid for.
+      '?select=id,status,price_pence,currency,email,name,service,starts_at,phone,notes' +
       '&id=eq.' + encodeURIComponent(id),
     { headers: supabaseHeaders() }
   );

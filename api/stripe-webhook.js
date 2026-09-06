@@ -23,6 +23,7 @@ import {
   supabaseConfigured,
   updateBooking
 } from './_lib/bookings.js';
+import { sendCustomerConfirmation, sendOwnerNotification } from './_lib/email.js';
 
 /* Stripe retries anything that is not a 2xx. That is the right behaviour for a
  * genuine outage on our side, and the wrong behaviour for an event we have
@@ -140,8 +141,13 @@ async function markPaid(session) {
     return;
   }
 
-  // Setting a status that is already 'paid' is harmless, which is what makes
-  // this safe to run again when Stripe redelivers the same event.
+  /* Noted BEFORE the update, because after it every delivery looks identical.
+   * Stripe redelivers events -- on its own retry schedule, and again if we ever
+   * answer slowly -- and setting 'paid' twice is harmless where sending a
+   * confirmation twice is not: the customer would be told they had booked
+   * twice, and start wondering whether they had paid twice. */
+  const alreadyPaid = ['paid', 'confirmed', 'completed'].includes(booking.status);
+
   const rows = await updateBooking(bookingId, {
     status: 'paid',
     stripe_session_id: session.id
@@ -153,6 +159,27 @@ async function markPaid(session) {
   }
 
   console.log('[webhook] booking', bookingId, 'marked paid');
+
+  if (alreadyPaid) {
+    console.log('[webhook] already paid, not resending confirmation');
+    return;
+  }
+
+  /* Deliberately after the booking is safely recorded, and deliberately unable
+   * to affect the outcome. Neither call throws -- both report failure by
+   * returning false -- so a provider outage costs a receipt, never a booking.
+   * Sent in parallel because the customer should not wait on Jeffery's copy. */
+  const [toCustomer, toOwner] = await Promise.all([
+    sendCustomerConfirmation(booking),
+    sendOwnerNotification(booking)
+  ]);
+
+  if (!toCustomer) {
+    console.error('[webhook] confirmation NOT sent to customer for booking', bookingId);
+  }
+  if (!toOwner) {
+    console.error('[webhook] notification NOT sent to owner for booking', bookingId);
+  }
 }
 
 async function markCancelled(session, reason) {
