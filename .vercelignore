@@ -1,0 +1,24 @@
+# Files that belong in the repository but should never be served to the public.
+#
+# The site is static, so Vercel publishes every file it deploys. Without this,
+# https://casttco.online/supabase/migrations/0003_consultation_slots.sql
+# returned 200 and handed anyone the complete schema: table names, column
+# names and the row level security policies protecting them.
+#
+# None of it grants access -- RLS is enforced whether or not an attacker knows
+# it exists -- but publishing the schema tells them exactly what is protected
+# and where to look for something that is not.
+
+# Database schema and migrations.
+supabase/
+
+# The pre-commit secret scanner, which otherwise publishes the patterns it
+# looks for -- a useful hint to anyone wanting to sneak a key past it.
+.githooks/
+
+# Documents the names of the environment variables. Harmless, but there is no
+# reason for it to be reachable over the web.
+.env.example
+
+# Local git metadata, in case it is ever present in a build context.
+.git/
