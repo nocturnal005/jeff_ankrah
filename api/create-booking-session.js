@@ -55,6 +55,19 @@ const SESSION_MINUTES = 30;
 const MAX_PENDING_PER_EMAIL = 5;
 const PENDING_WINDOW_MINUTES = 60;
 
+/* The backstop for the cap above, which is keyed on an address the caller
+ * chooses and so is defeated by rotating it. This one counts every unpaid
+ * booking regardless of address, and there is nothing in it to vary.
+ *
+ * Set far above any plausible real demand rather than close to it. The diary
+ * holds eight appointments a day; twenty unpaid bookings started inside a
+ * quarter of an hour is roughly seven times the busiest genuine burst this
+ * business could produce, so a real customer should never meet it. That
+ * headroom is deliberate: a ceiling tight enough to catch an attacker sooner
+ * would also turn away people trying to pay. */
+const MAX_PENDING_GLOBAL = 20;
+const GLOBAL_WINDOW_MINUTES = 15;
+
 export async function POST(request) {
   const stripeKey = env('STRIPE_SECRET_KEY');
 
@@ -113,17 +126,30 @@ export async function POST(request) {
    * through: turning away a paying customer because a defensive query errored
    * is a worse outcome than letting one extra row through. */
   try {
-    const recent = await countRecentPending(
-      checked.booking.email, PENDING_WINDOW_MINUTES, MAX_PENDING_PER_EMAIL
-    );
-    if (recent >= MAX_PENDING_PER_EMAIL) {
+    const [perEmail, everyone] = await Promise.all([
+      countRecentPending(checked.booking.email, PENDING_WINDOW_MINUTES, MAX_PENDING_PER_EMAIL),
+      countRecentPending(null, GLOBAL_WINDOW_MINUTES, MAX_PENDING_GLOBAL)
+    ]);
+
+    if (perEmail >= MAX_PENDING_PER_EMAIL) {
       console.warn('[booking] pending cap reached for an address');
       return json({
         error: 'You already have a booking waiting for payment. Please complete or cancel it before starting another, or contact us and we will help.'
       }, 429);
     }
+
+    /* Logged as an error rather than a warning: at this volume the ceiling
+     * being touched at all means either something is wrong or somebody is
+     * trying it on, and either is worth seeing in the logs. */
+    if (everyone >= MAX_PENDING_GLOBAL) {
+      console.error('[booking] GLOBAL pending ceiling reached —',
+        everyone, 'unpaid bookings in the last', GLOBAL_WINDOW_MINUTES, 'minutes');
+      return json({
+        error: 'Our booking system is unusually busy just now. Please try again in a few minutes, or contact us and we will book you in directly.'
+      }, 429);
+    }
   } catch (error) {
-    console.error('[booking] pending check failed, allowing anyway:', error.message);
+    console.error('[booking] pending checks failed, allowing anyway:', error.message);
   }
 
   let booking;
