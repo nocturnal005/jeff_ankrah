@@ -302,12 +302,17 @@ export async function releaseStalePending(olderThanMinutes) {
  * hammering the endpoint. It does not stop a distributed flood using fresh
  * addresses each time, and if that ever happens the answer is a real limiter
  * with durable storage, not a tighter number here. */
+/* Pass an email to count one address, or null to count everyone.
+ *
+ * The per-address count is keyed on a value the caller chooses, so rotating
+ * addresses walks straight past it. The unfiltered count is the backstop: it
+ * cannot be dodged that way, because there is nothing in it to vary. */
 export async function countRecentPending(email, windowMinutes, cap) {
   const since = new Date(Date.now() - windowMinutes * 60000).toISOString();
   const response = await fetch(
     env('SUPABASE_URL') + '/rest/v1/consultation_bookings' +
       '?select=id&status=eq.pending' +
-      '&email=eq.' + encodeURIComponent(email) +
+      (email ? '&email=eq.' + encodeURIComponent(email) : '') +
       '&created_at=gte.' + encodeURIComponent(since) +
       // Only ever needs to know whether the cap is reached, so it never reads
       // more rows than that regardless of how many are sitting there.
